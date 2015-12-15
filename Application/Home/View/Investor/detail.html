@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>投资人详情-蜂鸟创投</title>
+    <include file="Blocks/import"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <include file="Blocks/stayTuned"/>
+        <div class="container">
+            <!--内容显示列表-->
+            <div class="col-md-8 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="padding:10px 0">
+                        <div class="col-md-3 text-center" style="padding-left:0">
+
+                            <php>
+                                if(empty($user['headpic'])){
+                            </php>
+                            <div class="headpic-default">
+                                <span class="">{$user.username|mb_substr=0,1,"utf-8"|strtoupper}</span>
+                            </div>
+                            <php>}else{</php>
+                            <img src="__ROOT__/Uploads/headpic{$user.headpic}" alt="" class="headpic">
+                            <php>}</php>
+
+
+                        </div>
+                        <div class="col-md-7" style="padding-left:0">
+                            <div class="row">
+                                <span>姓名：</span>
+                                <span>{$user.realname} </span>
+                                <span>{$user.sex}</span>
+                            </div>
+                            <div class="row">
+                                <span>生日：</span>
+                                <span>{$user.birthday}</span>
+                            </div>
+                            <div class="row">
+                                <span>邮箱：</span>
+                                <span>{$user.email}</span>
+                            </div>
+                            <div class="row">
+                                <span>来自：</span>
+                                <span>{$user.province} {$user.city}</span>
+                            </div>
+                            <div class="row">
+                                <span>个人签名：</span>
+                                <span>{$user.signature}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <php>if($_SESSION['user']['id']!=$_GET['id']){</php>
+                            <button class="mtop1 form-control btn btn-sm btn-danger input-sm" id="follow">{$user.follow}</button>
+                            <php>}</php>
+                            <button class="mtop1 form-control btn btn-sm btn-success input-sm"
+                                    data-toggle="modal"
+                                    data-user="{$user.username}" data-uid="{$user.id}"
+                                    data-target="#sendmsg">发消息</button>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-md-12">
+                            <h4>投资信息</h4>
+
+                            <p>
+                                <span>投资类型：</span>
+                                <span>{$user.type}</span>
+
+                            </p>
+
+                            <p>
+                                <span>投资金额：</span>
+                                <span>{$user.scale}</span>
+
+                            </p>
+
+                            <p>
+                                <span>机构名称：</span>
+                                <span>{$user.institutionname}</span>
+                            </p>
+
+                            <p>
+                                <span>机构介绍：</span>
+
+                                {$user.intro}
+                            </p>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-md-12">
+                            <h4>偏好信息</h4>
+
+                            <p>
+                                <span>目标项目:</span>
+                                <span>{$user.wantproject}</span>
+
+                            </p>
+
+                            <p>
+                                <span>目标创业者:</span>
+                                <span>{$user.wantfounder}</span>
+
+                            </p>
+
+                            <p>
+                                <span>目标伙伴参与程度:</span>
+                                <span>{$user.wantstate}</span>
+
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+            <include file="Blocks/modalsendmsg"/>
+            <!--相关信息筛选-->
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        和他相关
+                    </div>
+                    <div class="panel-body">
+                        <!--项目-->
+                        <h4>关注的项目</h4>
+
+                        <div class="row">
+                            <!--TODO 项目展示-->
+                            <volist name="projects" id="vo">
+                                <div class="col-md-4 text-center">
+                                    <a href="__MODULE__/Project/detail?id={$vo.id}">
+                                        <img src="__ROOT__/Uploads/projectpic{$vo.logo}" alt="" class="img64">
+                                    </a>
+
+                                    <p>
+                                        <span class="label label-primary">{$vo.pname|subtext=4}</span>
+                                    </p>
+                                </div>
+                            </volist>
+
+                        </div>
+
+                        <!--他的动态-->
+                        <div class="line"></div>
+                        <h4>他的动态</h4>
+
+                        <div class="row" style="margin-bottom: 4px">
+
+                            <ul>
+                                <volist id="vo" name="topic">
+                                    <li> <a href="__MODULE__/Share/detailtopic?id={$vo.id}&uid={$vo.id}" target="_blank" class="text-info">{$vo.content|subtext=14}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+
+                        <!--他的博客-->
+                        <div class="line"></div>
+                        <h4>他的博客</h4>
+
+                        <div class="row" style="margin-bottom: 4px">
+                            <!--TODO 主题列表显示-->
+                            <ul>
+                                <volist id="vo" name="blog">
+                                    <li> <a href="__MODULE__/Share/detailblog?id={$vo.id}&uid={$vo.id}" target="_blank" class="text-info">{$vo.title|subtext=14}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#follow").on('click', '', function (event) {
+            event.preventDefault();
+            var id = $(this).attr('id');
+            $(this).load('__MODULE__/User/doFollowUser?id={$Think.get.id}');
+        });
+    });
+</script>

@@ -1,0 +1,48 @@
+.img64{
+    width:64px;
+    height: 64px;
+    border:1px solid #d6d6d6;
+    border-radius: 5px;
+    margin:8px 2px 4px 2px;
+}
+.founderRow{
+    border-bottom:1px solid rgb(213, 213, 213);
+    padding:4px;
+    margin:4px 0;
+}
+
+.listtitle{
+
+
+}
+.founderlist-address{
+    color:#8e8e8e;
+    font-size:11px;
+}
+.founderlist-content{
+
+}
+.img32{
+    width:32px;
+    height:32px;
+    border:1px solid #d6d6d6;
+    border-radius: 50px;
+    margin:4px;
+
+}
+
+.detail-topic{
+    border:1px solid #ddd;
+    padding:4px;
+    margin:0;
+}
+.nopad{
+    padding:0;
+}
+.nomag{
+    margin:0;
+}
+.commentrow{
+    padding:8px;
+    box-shadow: 1px 1px 1px 1px #ddd;
+}

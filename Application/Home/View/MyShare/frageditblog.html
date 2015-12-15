@@ -1,0 +1,90 @@
+<div class="panel panel-default" style="border:none">
+    <div class="panel-body" style="padding:8px" ;>
+        <form action="">
+            <div class="row">
+                <!-- 博客标题、内容等 -->
+                <div class="col-md-9">
+                    <label for="">标题:</label>
+                    <small>(为您的博客取一个醒目的标题)</small>
+                    <input id="title" type="text" class="form-control" name="title"
+                           value="{$blog.title}" placeholder="标题">
+                    <br>
+                    <label for="">博客内容:</label>
+                    <!-- 编辑器 -->
+                    <!-- 加载编辑器的容器 -->
+                    <script id="editor" name="content" type="text/plain">
+                        {$blog.content}
+
+
+                    </script>
+                    <br>
+
+                    <div class="text-center">
+                        <input type="hidden" name="id" value="{$blog.id}">
+                        <input type="button" class="btn btn-primary" id="postblog" value="发布博客">
+                    </div>
+                </div>
+                <!-- 选择分类标签等 -->
+                <div class="col-md-3">
+                    <label for="">分类:</label>
+                    <small>(选择合适的分类)</small>
+                    <select name="type" id="type" class="form-control">
+                        <option value="项目成果">项目成果</option>
+                        <option value="创业经历">创业经历</option>
+                        <option value="知识分享">知识分享</option>
+                        <option value="个人感悟">个人感悟</option>
+                    </select>
+                    <br>
+                    <label for="">标签</label>
+                    <small>(多个标签用;隔开)</small>
+                    <input id="tag" type="text" name="tag" class="form-control"
+                           value="{$blog.tag}" placeholder="多个标签用;隔开">
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script>
+    var ue = UE.getEditor('editor');
+
+    jQuery(document).ready(function () {
+        $("select[name='type']").find("option[value='{$blog.type}']").attr("selected", true);
+        $("#postblog").on('click', function () {
+            var id      = $(this).siblings("input[name='id']").val();
+            var title   = $("#title").val();
+            var tag     = $("#tag").val();
+            var type    = $("#type").val();
+            var content = ue.getContent();
+            if (validate($("form"))) {
+                postBlog(id, title, content, tag, type);
+            }
+        });
+
+    });
+    function postBlog(id, title, content, tag, type) {
+        $.post(CON_PATH + '/doEditBlog', {
+                   id:      id,
+                   title:   title,
+                   tag:     tag,
+                   content: content,
+                   type:    type
+               },
+               function (data) {
+                   console.log(data);
+                   alertInfo('info', '', data['info']);
+                   if (data['status'] == 1) {
+                       location.reload();
+                   }
+               }
+        );
+    }
+
+</script>
+

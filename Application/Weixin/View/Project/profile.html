@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+	<include file='blocks:head'/>
+	<link rel="stylesheet" href="__PUBLIC__/css/default.weixin.css">
+	<title>编辑项目</title>
+</head>
+<body>
+<form class="form-horizontal" role="form">
+	<div class="col-xs-12">
+		<a class="pull-right" href="">
+			<button id="profile" type="submit" class="btn btn-default">发布</button>
+		</a>
+	</div>
+	<div class="form-group">
+		<label for="inpname" class="col-xs-offset-1 col-xs-2 control-label">项目名称</label>
+
+		<div class="col-xs-8">
+			<input type="" class="form-control" id="inpname" name="pname">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inlocation" class="col-xs-2 control-label">地址</label>
+
+		<div class="col-xs-8">
+			<input type="" class="form-control" id="inlocation" name="location">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inptype" class="col-xs-2 control-label">类型</label>
+
+		<div class="col-xs-8">
+			<input type="" class="form-control" id="inptype" name="ptype">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="instage" class="col-xs-2 control-label">进展进度</label>
+
+		<div class="col-xs-8">
+			<input type="" class="form-control" id="instage" name="stage">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inparterstype" class="col-xs-offset-1 col-xs-2 control-label">寻求伙伴类型</label>
+
+		<div class="col-xs-8">
+			<input type="" class="form-control" id="inparterstype" name="partnertype">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="indigest" class="col-xs-2 control-label">描述</label>
+
+		<div class="col-xs-8">
+			<input type="" class="form-control" id="indigest" name="digest">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="indetail" class="col-xs-2 control-label">详情</label>
+
+		<div class="col-xs-8">
+			<input type="" class="form-control" id="indetail" name="detail">
+		</div>
+	</div>
+
+</form>
+</body>
+<script>
+	$(document).ready(function () {
+		$('#profile').on('click', '', function (event) {
+			event.preventDefault();
+
+			console.log($('form').serialize());
+			$.ajax({
+				type: 'post',
+				url: '__CONTROLLER__/updateProfile',
+				data: $('form').serialize(),
+				success: success,
+				dataType: 'json'
+			});
+			function success(data) {
+				console.log(data);
+				if (data.status == 1) {
+					window.location.href = data.url;
+				} else {
+					alert(data.info);
+				}
+			}
+		})
+	});
+
+</script>
+</html>

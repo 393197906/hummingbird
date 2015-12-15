@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+    <script src="__PUBLIC__/js/validate.js"></script>
+    <script src="__PUBLIC__/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <form action="" id="form">
+        <input type="text" name="username" placeholder="用户名" class="form-control">
+        <input type="text" name="password" placeholder="密码" class="form-control">
+
+        <input type="submit" value="submit">
+
+
+    </form>
+</div>
+
+
+</body>
+</html>
+<script>
+
+    $(document).ready(function () {
+        $("input[type='submit']").on('click', '', function (event) {
+            event.preventDefault();
+            validate($('#form'));
+        });
+
+    });
+</script>

@@ -1,0 +1,322 @@
+
+.mtop1 {
+    margin-top: 4px;
+}
+
+.mtop12 {
+    margin-top: 12px;
+
+}
+
+.cur {
+    cursor: pointer;
+}
+
+/*主页*/
+a:hover {
+    text-decoration: none;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 微软雅黑, sans-serif;;
+    /*background:#1a3870;*/
+}
+
+.tiptext {
+    color: #717171;
+}
+
+.webname {
+    font-size: 26px;
+    line-height: 1em;
+    font-family: 华文新魏, Consolas, sans-serif;
+
+}
+
+.nav {
+    font-family: 微软雅黑, sans-serif;
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+    line-height: 2em;
+
+}
+
+.nav ul li {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.nav ul li a {
+    color: #1a1a1a;
+}
+
+.jumbg1 {
+    background: #202021 url("../images/home/jumbg1.png") center repeat;
+
+}
+
+.jumbg2 {
+    background-image: -webkit-linear-gradient(#202d5f, #614381);
+    background-image: linear-gradient(#202d5f, #614381);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#202d5f', endColorstr='#614381', GradientType=0);
+    border-bottom: 0;
+    box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    color: #5f5f5f;
+}
+
+/*注册页面reg.html*/
+
+.regstep {
+    margin-top: 10px;
+    height: 60px;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+}
+
+.stepblock {
+    border-right: 1px solid #d0d0d0;
+    height: 100%;
+    color: #ccc;
+    background: #fafafa;
+}
+
+.stepblock-icon {
+    float: left;
+    padding-top: 12px;
+    margin-right: 12px;
+}
+
+.stepblock-content {
+    padding-top: 10px;
+    float: left;
+}
+
+.stepblock-content-title {
+    font-weight: bold;
+}
+
+.stepblock-content-content {
+
+}
+
+.step-chose {
+    background: white;
+    color: #111;
+}
+
+.step-icon-chose {
+
+}
+
+.step-content-chose {
+
+}
+
+.line {
+    width: auto;
+    border-top: 1px solid #cfcfcf;
+    margin: 15px -15px;
+}
+
+/*founder合伙人*/
+.headpic {
+    border-radius: 10px;
+    padding: 1px;
+    width: 104px;
+    height: 104px;
+}
+
+.headpic-default {
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 1px;
+    width: 120px;
+    height: 120px;
+    color: white;
+    background: #337ab7;
+    font-size: 96px;
+    line-height: 1.15em;
+}
+
+.headpic-default96 {
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 1px;
+    width: 96px;
+    height: 96px;
+    color: white;
+    background: #337ab7;
+    font-size: 80px;
+    line-height: 1.15em;
+    margin-bottom: 3px;
+}
+
+.headpic-default64 {
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 1px;
+    width: 64px;
+    height: 64px;
+    color: white;
+    background: #337ab7;
+    font-size: 48px;
+    line-height: 1.15em;
+    margin-bottom: 2px;
+
+}
+
+.img64 {
+    border-radius: 8px;
+    padding: 1px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 2px;
+}
+
+.img96 {
+    border-radius: 8px;
+    padding: 1px;
+    width: 96px;
+    height: 96px;
+    margin-bottom: 3px;
+}
+.img256 {
+    border: 1px solid #ccc;
+    padding: 1px;
+    width: 256px;
+    height: 200px;
+    margin-bottom: 3px;
+}
+
+.intro {
+    padding: 8px 0;
+    word-wrap: break-word;
+    word-break: normal;
+    height: 100px;
+    width: 100%;
+}
+
+.nav-second {
+    background: #f0f0f0;
+
+}
+
+.nav-second > li {
+    margin: 0 !important;
+    padding: 0;
+    width: 100%;
+}
+
+.nav-second li a {
+    color: #294bae !important;
+    font-size: 14px;
+    padding: 2px 0;
+}
+
+.nav-second > li.active > a, .nav-second > li.active > a:focus, .nav-second > li.active > a:hover {
+    color: #fff !important;
+    background-color: #337ab7;
+}
+
+.follow-man {
+    display: inline-block;
+    height: auto;
+    padding: 4px;
+    margin: 4px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 2px 1px #eee;
+}
+
+/*消息*/
+.msg-row {
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    display: table;
+    width: 100%;
+}
+
+/*分享*/
+.newstatu {
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #337ab7;
+    width: 80%;
+
+}
+
+.newstatu-content {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 8px;
+}
+
+.newstatu-control {
+    background: #337ab7;
+    border-radius: 0;
+    width: 100%;
+    border: 1px solid #337ab7;
+    height: auto;
+    display: table;
+}
+
+.btn-newstatu {
+    border-radius: 0;
+    border: none;
+    border-left: 2px solid #296394;
+}
+
+.statutype {
+    background: #337ab7;
+
+}
+
+.statutype > a {
+    color: white !important;
+}
+
+.statutype > a:hover {
+    color: #111 !important;
+}
+
+.topic-row {
+    width: 100%;
+    margin: 5px;
+    padding: 2px;
+    border: 1px solid #ddd;
+}
+
+.share-topic-row {
+    margin: 4px 0;
+    border-bottom: 1px solid #ddd;
+    display: table;
+    width: 100%;
+    padding:2px;
+}
+
+.share-topic-label {
+    width: 60px;
+    padding: 2px 8px;
+    margin: 2px;
+    background: #dcdcdc;
+
+}
+
+.overword{
+    word-wrap:break-word;
+    word-break:break-all;
+}

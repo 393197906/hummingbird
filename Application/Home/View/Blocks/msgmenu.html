@@ -1,0 +1,47 @@
+<ul class="nav nav-pills nav-stacked" style="background:#e6e6e6;border:1px solid #ccc;border-radius: 4px">
+    <li><a href="__CONTROLLER__/index">系统消息</a>
+        <ul class="nav nav-second text-center">
+            <li id="fragsystemmsg">
+                <a href="__CONTROLLER__/index?frag=systemmsg">
+                    <span class="glyphicon glyphicon-bullhorn"></span>
+                    通知信息
+                    <php>
+                        if($_SESSION['msg']['sysnumber']!=0){
+                    </php>
+                        <span class="badge" style="background: #d70000">{$Think.session.msg.sysnumber}</span>
+                    <php>}</php>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li><a href="__CONTROLLER__/mymsg">我的消息</a>
+        <ul class="nav nav-second text-center">
+            <!--TODO 朋友列表-->
+            <li id="fragnewmsg">
+                <a href="__CONTROLLER__/mymsg?frag=newmsg">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    新消息&nbsp;&nbsp;
+                    <php>
+                        if($_SESSION['msg']['usernumber']!=0){
+                    </php>
+                        <span class="badge" style="background: #d70000">{$Think.session.msg.usernumber}</span>
+                    <php>}</php>
+                </a>
+            </li>
+            <!--            <li id="fragsendmsg"><a href="__CONTROLLER__/mymsg?frag=sendmsg">
+                            <span class="glyphicon glyphicon-send"></span>
+                            发消息&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        </li>-->
+            <li id="fragsendedmsg"><a href="__CONTROLLER__/mymsg?frag=sendedmsg">
+                <span class="glyphicon glyphicon-saved"></span>
+                已发送&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </li>
+
+        </ul>
+    </li>
+
+</ul>
+
+<script>
+    $("#{$frag}").addClass('active');
+</script>

@@ -1,0 +1,142 @@
+<input type="hidden" name="info"  value="founder">
+<br>
+<legend>
+    能力信息
+</legend>
+<div style="margin-top:12px">
+    <label for="">专业能力与水准</label>
+    <small> (认真学习过的专业)</small>
+    <div class="row">
+        <div class="col-md-7" style="padding-right:0">
+            <input type="text" class="form-control" name="profession" placeholder="设计;编码;营销;管理;语言;教育...">
+        </div>
+        <div class="col-md-5">
+            <select name="professionlevel" class="form-control">
+                <option value="初学者">初学者</option>
+                <option value="有所领悟">有所领悟</option>
+                <option value="实际运用">实际运用</option>
+                <option value="业内领先">业内领先</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top:12px">
+    <label for="">特长</label>
+    <small> (优于他人之处,多个请用;隔开)</small>
+    <input type="text" class="form-control" name="skill" placeholder="身体强壮;能言善辩;学习能力强;酒神;颜值高;热心肠;忠诚;耐心">
+
+</div>
+
+<div style="margin-top:12px">
+    <label for="">取得学历</label>
+    <small> (学历、毕业学校、毕业时间)</small>
+    <div class="row">
+        <div class="col-md-3" style="padding-right:0">
+            <select name="education" class="form-control">
+                <option value="高中">高中</option>
+                <option value="专科">专科</option>
+                <option value="本科" selected>本科</option>
+                <option value="本科以上">本科以上</option>
+            </select>
+
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" name="school" placeholder="毕业学校">
+        </div>
+        <div class="col-md-4" style="padding-left:0">
+            <select name="graduationyear" class="form-control">
+                <option value="2000">2000年</option>
+                <option value="2001">2001年</option>
+                <option value="2002">2002年</option>
+                <option value="2003">2003年</option>
+                <option value="2004">2004年</option>
+                <option value="2005">2005年</option>
+                <option value="2006">2006年</option>
+                <option value="2007">2007年</option>
+                <option value="2008">2008年</option>
+                <option value="2009">2009年</option>
+                <option value="2010" selected>2010年</option>
+                <option value="2011">2011年</option>
+                <option value="2012">2012年</option>
+                <option value="2013">2013年</option>
+                <option value="2014">2014年</option>
+                <option value="2015">2015年</option>
+                <option value="2016">2016年</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+<br>
+<legend>创业信息</legend>
+
+<div style="margin-top:12px">
+    <label for="">类型：</label>
+    <select name="type" class="form-control">
+        <option value="创始人">创始人</option>
+        <option value="营销运营">营销运营</option>
+        <option value="策划设计师">策划设计师</option>
+        <option value="技术工程师">技术工程师</option>
+    </select>
+</div>
+<div style="margin-top:12px">
+    <label for="">创业阶段</label>
+    <small> (创业阶段及参与方式)</small>
+    <div class="row">
+        <div class="col-md-6">
+            <select name="stage" class="form-control">
+                <option value="观望学习">观望学习</option>
+                <option value="参与创业">参与创业</option>
+                <option value="带领团队">带领团队</option>
+                <option value="公司化运营">公司化运营</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <select name="founderstate" class="form-control">
+                <option value="业余关注">业余关注</option>
+                <option value="兼职参与">兼职参与</option>
+                <option value="全职参与">全职参与</option>
+                <option value="投入全部">投入全部</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div style="margin-top:12px">
+    <label for="">定位优势</label>
+    <small> (团队中的定位及特长，能做出的贡献)</small>
+    <input type="text" class="form-control" name="advantage" placeholder="打杂能手;产品开发;有钱任性;市场营销...">
+</div>
+
+<div style="margin-top:12px">
+    <label for="">公司情况</label>
+    <small> (公司名称及人数，未注册公司留空)</small>
+    <div class="row">
+        <div class="col-md-8">
+            <input type="text" class="form-control" name="companyname" placeholder="公司名称">
+
+        </div>
+        <div class="col-md-4" style="padding-left:0">
+            <select name="teamnumber" class="form-control">
+                <option value="2-5人">2-5人</option>
+                <option value="6-20人">6-20人</option>
+                <option value="21-50人">21-50人</option>
+                <option value="51+人">51+人</option>
+
+            </select>
+        </div>
+    </div>
+</div>
+<div style="margin-top:12px">
+    <label for="">创业经历</label>
+    <small> (自我介绍，创业经历及感悟)</small>
+    <textarea name="intro" rows="5" class="form-control" placeholder="自我介绍，创业经历"></textarea>
+</div>
+
+<div class="text-right" style="margin-top:12px">
+    <button class="btn btn-success" id="savereg2" type="submit">提交信息</button>
+</div>
+
+

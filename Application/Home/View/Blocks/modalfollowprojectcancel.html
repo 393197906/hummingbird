@@ -1,0 +1,43 @@
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="follow">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">关注</h4>
+            </div>
+            <div class="modal-body text-center">
+
+                <h3></h3>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#follow").on('show.bs.modal', function (event) {
+            var button   = $(event.relatedTarget);
+            var id      = button.data('id');
+            var modal    = $(this);
+            $.get("__MODULE__/User/doFollowProject",
+                    {
+                        id:id
+                    },
+                    function(data,status){
+                        if(status == 'success'){
+                            if(data == "关注") {
+                                modal.find('.modal-body h3').text("取消关注成功");
+                                setTimeout(function(){
+                                    history.go(0);
+                                },1000)
+                            }else{
+                                modal.find('.modal-body h3').text("重新关注成功");
+                            }
+                            $("#cancel").text(data);
+                        }
+                    });
+
+        });
+    });
+</script>

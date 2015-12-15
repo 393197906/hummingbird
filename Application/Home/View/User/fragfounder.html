@@ -1,0 +1,87 @@
+<div class="col-md-9">
+    <form action="__MODULE__/User/userInfoChange" method="post">
+        <legend>创业信息</legend>
+
+        <div style="margin-top:12px">
+            <!--<input type="hidden" name = "type" value = "founder">-->
+            <label for="">类型：</label>
+            <select name="type" class="form-control" id="selectType">
+                <option value="创始人">创始人</option>
+                <option value="营销运营">营销运营</option>
+                <option value="策划设计师">策划设计师</option>
+                <option value="技术工程师">技术工程师</option>
+            </select>
+        </div>
+        <div style="margin-top:12px">
+            <label for="">创业阶段</label>
+            <small> (创业阶段及参与方式)</small>
+            <div class="row">
+                <div class="col-md-6">
+                    <select name="stage" class="form-control" id="selectStage">
+                        <option value="观望学习">观望学习</option>
+                        <option value="参与创业">参与创业</option>
+                        <option value="带领团队">带领团队</option>
+                        <option value="公司化运营">公司化运营</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <select name="founderstate" class="form-control" id="selectState">
+                        <option value="业余关注">业余关注</option>
+                        <option value="兼职参与">兼职参与</option>
+                        <option value="全职参与">全职参与</option>
+                        <option value="投入全部">投入全部</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="margin-top:12px">
+            <label for="">定位优势</label>
+            <small> (团队中的定位及特长，能做出的贡献)</small>
+            <input type="text" class="form-control"
+                   value="{$user.advantage}" name="advantage" placeholder="打杂能手;产品开发;有钱任性;市场营销...">
+        </div>
+
+        <div style="margin-top:12px">
+            <label for="">公司情况</label>
+            <small> (公司名称及人数，未注册公司留空)</small>
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="text" class="form-control"
+                           value="{$user.companyname}" name="companyname" placeholder="公司名称">
+
+                </div>
+                <div class="col-md-4" style="padding-left:0">
+                    <select name="teamnumber" class="form-control" id="selectTeamnumber">
+                        <option value="2-5人">2-5人</option>
+                        <option value="6-20人">6-20人</option>
+                        <option value="21-50人">21-50人</option>
+                        <option value="51+人">51+人</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:12px">
+            <label for="">创业经历</label>
+            <small> (自我介绍，创业经历及感悟)</small>
+            <textarea name="intro" rows="5" class="form-control" placeholder="自我介绍，创业经历">{$user.intro}</textarea>
+        </div>
+
+        <div class="text-center" style="margin-top:12px">
+            <input class="btn btn-success" type="submit" value="保存">
+        </div>
+    </form>
+</div>
+<div class="col-md-3"></div>
+
+<script>
+    $(document).ready(function(){
+        $("#selectType  option[value='{$user.type}'] ").attr("selected",true);
+        $("#selectStage  option[value='{$user.stage}'] ").attr("selected",true);
+        $("#selectState  option[value='{$user.founderstate}'] ").attr("selected",true);
+        $("#selectTeamnumber  option[value='{$user.teamnumber}'] ").attr("selected",true);
+
+    });
+</script

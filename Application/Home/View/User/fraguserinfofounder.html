@@ -1,0 +1,50 @@
+<div class="col-md-9">
+    <br>
+    <legend>基本信息</legend>
+    <div style="margin-top:12px">
+        <input type="hidden" name="type" value="founder">
+        <span>姓名：</span> {$user.realname}<br>
+        <span>性别：</span> {$user.sex}<br>
+        <span>年龄：</span>{$user.birthday} <br>
+        <span>联系方式：</span>{$user.phone} <br>
+        <span>地点：</span>{$user.province} {$user.city} <br>
+    </div>
+    <br>
+    <legend>
+        能力信息
+    </legend>
+    <div style="margin-top:12px">
+        <span>专业能力：{$user.profession} ({$user.professionlevel})</span> <br>
+        <span>特长：{$user.skill}</span> <br>
+        <span>学历：{$user.education}</span> <br>
+        <span>毕业学校：{$user.school}</span> <br>
+        <span>毕业年份：{$user.graduationyear}</span> <br>
+    </div>
+    <br>
+    <legend>创业信息</legend>
+
+    <div style="margin-top:12px">
+        <span>类型：</span>{$user.type} <br>
+        <span>创业阶段：</span>{$user.stage} <br>
+        <span>参与程度：</span>{$user.founderstate} <br>
+        <span>定位及优势：</span> {$user.advantage}<br>
+        <span>公司名称：</span> {$user.companyname}<br>
+        <span>团队规模：</span> {$user.teamnumber}<br>
+        <span>创业经历：</span>{$user.intro} <br>
+
+
+    </div>
+    <br>
+    <legend>偏好信息</legend>
+    <div style="margin-top:12px">
+        我的头像：
+
+        <img src="__ROOT__/Uploads/headpic{$user.headpic}" alt="" class="headpic">
+        <br>
+        <span>兴趣爱好：</span>{$user.hobby} <br>
+        <span>寻找合伙人类型：</span> {$user.wanttype}<br>
+        <span>寻找合伙人状态：</span>{$user.wantstate} <br>
+    </div>
+
+</div>
+<div class="col-md-3"></div>

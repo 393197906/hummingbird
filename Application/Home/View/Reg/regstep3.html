@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>填写偏好-注册</title>
+    <include file="Blocks/import"/>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header-narrow"/>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="container">
+                <!--注册标题-->
+                <div class="col-md-8 col-md-offset-2">
+                    <h2><strong>加入蜂鸟创投</strong> <br>
+                        <h4>
+                            靠谱的同伴，靠谱的项目，靠谱投资资源!
+                        </h4>
+                    </h2>
+                    <br>
+                </div>
+                <div class="clearfix"></div>
+                <!--步骤-->
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="regstep">
+                        <div class="stepblock col-md-4">
+                            <div class="stepblock-icon">
+                                <img src="__PUBLIC__/images/home/step-user.png" alt="">
+                            </div>
+                            <div class="stepblock-content">
+                                <div class="stepblock-content-title">第一步</div>
+                                <div class="stepblock-content-content">
+                                    注册个人账号
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stepblock  col-md-4">
+                            <div class="stepblock-icon">
+                                <img src="__PUBLIC__/images/home/step-detail.png" alt="">
+                            </div>
+                            <div class="stepblock-content">
+                                <div class="stepblock-content-title">第二步</div>
+                                <div class="stepblock-content-content">
+                                    完善您的信息
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stepblock step-chose col-md-4"
+                             style="border-right:none;">
+                            <div class="stepblock-icon">
+                                <img src="__PUBLIC__/images/home/step-hobbieschose.png" alt="">
+                            </div>
+                            <div class="stepblock-content">
+                                <div class="stepblock-content-title">第三步</div>
+                                <div class="stepblock-content-content">填写您的偏好</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--内容-->
+                <div class="clearfix"></div>
+                <div class="step1 col-md-8 col-md-offset-2" style="margin-top:12px;padding-left:0;">
+                    <div class="col-md-7" style="margin-top:12px;padding-right:0">
+                        <h4><strong>填写您的偏好</strong></h4>
+                        <!--完善内容-->
+                        <div class="reg_content">
+                            <form action="__MODULE__/Reg/doReg3" method="post" id="regform" enctype="multipart/form-data">
+                                <!--头像-->
+                                <div style="margin-top:12px">
+                                    <label for="">选择头像</label>
+                                    <small>(选择你喜爱的头像，方便识别)</small>
+                                    <br>
+                                    <!--TODO 处理头像上传-->
+                                    <img src="" alt="" class="headpic cur" id="headpic">
+                                    <input type="file" name="headpic" style="display: none" accept="image/gif,image/png,image/jpg,image/jpeg">
+
+                                </div>
+                                <include file="$page"/>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-md-offset-1" style="padding:0;margin-top:36px">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>
+                                    填写您的偏好
+                                </strong>
+                            </div>
+                            <div class="panel-body">
+                                <ul style="padding:0">
+                                    <li>
+                                        填写你的偏好，有助于系统帮助筛选更适合你的合伙人，项目以及投资人。
+                                    </li>
+                                    <li>
+
+                                    </li>
+                                    <div class="line"></div>
+                                    <li>
+                                        <span class="text-success glyphicon glyphicon-ok">
+                                        </span>&nbsp;
+                                        只找对的，不找凑和的。
+                                    </li>
+                                    <li>
+                                        <span class="text-success glyphicon glyphicon-ok">
+                                        </span>&nbsp;
+                                        智慧匹配，人工推荐。
+                                    </li>
+                                    <li>
+                                        <span class="text-success glyphicon glyphicon-ok">
+                                        </span>&nbsp;
+                                        展现自我，吸引他人。
+                                    </li>
+                                    <li>
+                                        <span class="text-success glyphicon glyphicon-ok">
+                                        </span>&nbsp;
+                                        即将迈进新的历程！
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="footer container">
+        <include file="Blocks/footer-narrow"/>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#btn_investor").on('click', '', function (event) {
+            event.preventDefault();
+            loadContent($(".reg_content"), '__CONTROLLER__/reginvestor');
+        });
+        $("#btn_founder").on('click', '', function (event) {
+            event.preventDefault();
+            loadContent($(".reg_content"), '__CONTROLLER__/regfounder');
+        });
+        // 表单验证
+        $("form").delegate('#savereg3', 'click', function (event) {
+            event.preventDefault();
+            if (validate($("form"))) {
+                $("form").submit();
+            }
+        });
+
+        $("#headpic").on('click', '', function (event) {
+            event.preventDefault();
+            $("input[name='headpic']").click();
+
+        });
+
+        $("input[name='headpic']").on('change', '', function (event) {
+            event.preventDefault();
+            var files = this.files;
+            var file = files[0];
+            var reader = new FileReader();
+
+            reader.readAsDataURL(file);
+            reader.onload = function(){
+                img=this.result;
+                console.log(img);
+                $("#headpic").attr('src',this.result);
+            };
+        });
+    });
+
+</script>

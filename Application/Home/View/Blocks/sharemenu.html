@@ -1,0 +1,34 @@
+<ul class="nav nav-pills nav-stacked" style="background:#e6e6e6;border:1px solid #ccc;border-radius: 4px">
+    <li><a href="__CONTROLLER__/index">分享</a>
+        <ul class="nav nav-second text-center">
+            <li id="fragnewstatu"><a href="__CONTROLLER__/index?frag=newstatu">
+                <span class="iconfont icon-faweiboxie"></span>
+                分享话题</a>
+            </li>
+            <li id="fragnewblog"><a href="__CONTROLLER__/index?frag=newblog">
+                <span class="iconfont icon-bokefenxiang"></span>
+                分享博客</a>
+            </li>
+
+        </ul>
+    </li>
+
+    <li><a href="__CONTROLLER__/index">管理分享</a>
+        <ul class="nav nav-second text-center">
+            <li id="fragmystatu"><a href="__CONTROLLER__/index?frag=mystatu">
+                <span class="iconfont icon-xiaoxi1"></span>
+                我的话题</a>
+            </li>
+            <li id="fragmyblog"><a href="__CONTROLLER__/index?frag=myblog">
+                <span class="iconfont icon-wenzhang"></span>
+                我的博客</a>
+            </li>
+
+        </ul>
+    </li>
+
+</ul>
+
+<script>
+    $("#{$frag}").addClass('active');
+</script>

@@ -1,0 +1,79 @@
+<volist name="blogs" id="vo">
+    <div class="share-topic-row">
+        <div class="pull-left text-center" style="padding:4px">
+            <div class="pull-left">
+                <div>
+                    <span class="text-muted">{$vo.view}</span>
+                </div>
+
+                <div class="share-topic-label cur">
+                    <span class="iconfont icon-liulanliang text-muted" style="font-size:18px;"></span>
+                </div>
+            </div>
+            <div class="pull-left">
+                <div>
+                    <span class="text-success approvenumber">{$vo.rise}</span>
+                </div>
+
+                <div class="share-topic-label cur dolike">
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <span class="iconfont icon-zan text-success" style="font-size:18px;"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="col-md-2">
+                <a href="__MODULE__/Founder/detail?id={$vo.uid}" target="_blank">
+                    <img src="__ROOT__/Uploads/headpic{$vo.headpic}" alt="" class="img64">
+
+                </a>
+            </div>
+            <div class="col-md-10" style="overflow: hidden">
+                <a href="__MODULE__/Founder/detail?id={$vo.uid}" target="_blank">
+                    <span class="text-primary">
+                        <strong>{$vo.username}</strong>
+                    </span>
+                </a>
+                &nbsp;&nbsp;
+                <span class="text-muted">
+                    <strong>
+                        <small>{$vo.posttime}</small>
+                    </strong>
+                </span>
+
+                <div style="font-size:16px;">
+                    <!--TODO 跳转到详情页-->
+                    <span class="text-danger">
+                    [{$vo.type}]
+                    </span>
+                    <a href="__CONTROLLER__/detailblog?id={$vo.id}&uid={$vo.uid}" target="_blank" class="text-info">{$vo.title}</a>
+                </div>
+                <span class="text-warning">{$vo.tag}</span>
+
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+</volist>
+{$page}
+<script>
+    $(document).ready(function () {
+        $(".dolike").on('click', '', function (event) {
+            event.preventDefault();
+            var approvenumber = $(this).parent().find(".approvenumber");
+            var id = $(this).find("input[name='id']").val();
+            $.post(MOD_PATH+'/User/doRise',{type:'blog',id:id},function(data){
+                alertInfo('info','',data['info']);
+                if(data['status']==1) {
+                    var num=approvenumber.html();
+                    console.log(num);
+                    approvenumber.html(++num);
+                }
+            })
+        });
+    });
+</script>

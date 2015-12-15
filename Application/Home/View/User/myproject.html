@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的项目</title>
+    <include file="Blocks/import"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <div class="row" style="padding:20px;">
+            <div class="container">
+                <div class="col-md-2">
+                    <include file="Blocks/usermenufounder"/>
+                </div>
+                <div class="col-md-10">
+                    <include file="$frag"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.initProv("#pro", "#city");
+    });
+</script>

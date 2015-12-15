@@ -1,0 +1,62 @@
+<div class="panel panel-default" style="border:none">
+    <div class="panel-body" style="padding:8px" ;>
+        <table class="table  table-hover table-bordered text-center">
+            <thead>
+            <tr>
+                <th>信息</th>
+                <th>类别</th>
+                <th>标题</th>
+                <th>发布时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="blogs" id="vo">
+                <tr>
+                    <td>
+                        <span class="text-muted">
+                            <span class="iconfont icon-liulanliang"></span>
+                        {$vo.view}
+                        </span>
+                        &nbsp;
+                        <span class="text-danger">
+                            <span class="iconfont icon-zan"></span>
+                            {$vo.approvenumber}
+                        </span>
+                    </td>
+                    <td>{$vo.type}</td>
+                    <td style="text-align:left"><a href="__CONTROLLER__/index?frag=editblog&id={$vo.id}">{$vo.title}</a>
+                    </td>
+                    <td>
+                        <small>
+                            <span class="text-muted">{$vo.posttime}</span>
+
+                        </small>
+                    </td>
+                    <td>
+                        <input type="hidden" name="id" value="{$vo.id}">
+                        <a href="__MODULE__/Share/detailblog?id={$vo.id}&uid={$Think.session.user.id}"
+                           target="_blank" class="label label-primary">查看</a>
+                        <a href="javascript:" class="label label-danger" id="delblog">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#delblog").on('click', '', function (event) {
+            event.preventDefault();
+            var id = $("input[name='id']").val();
+            $.post(CON_PATH + '/doDelBlog', {id: id}, function (data) {
+                alertInfo('info','',data['info']);
+                if(data['status']==1){
+                    location.reload();
+                }
+            })
+        });
+    });
+</script>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的项目</title>
+    <include file="Blocks/import"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <div class="row" style="padding:20px;">
+            <div class="container">
+                <div class="col-md-2">
+                    <include file="$menu"/>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-9">
+                        <form action="__MODULE__/User/doEditProject" enctype="multipart/form-data" method="post">
+                            <div class="mtop12">
+                                <label for="">项目图标:</label>
+                                <small>(为您的项目选择一个合适的图标)</small>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="__ROOT__/Uploads/projectpic{$project.logo}" class="headpic cur"
+                                             id="headpic">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="logo" style="display: none;">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="mtop12">
+                                <label for="">项目名称：</label>
+                                <small>(项目名称及方向)</small>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="text" name="pname"
+                                               value="{$project.pname}" class="form-control" placeholder="项目名称">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select name="ptype" class="form-control" id="ptype">
+                                            <option value="互联网+">互联网+</option>
+                                            <option value="科学研究">科学研究</option>
+                                            <option value="科技制造">科技制造</option>
+                                            <option value="互联网产品">互联网产品</option>
+                                            <option value="物联网产品">物联网产品</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mtop12">
+                                <label for="">项目地区：</label>
+                                <small>(项目从哪里开展)</small>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <select name="province" class="form-control" id="pro">
+                                            <!--<option value="山东省">山东省</option>-->
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select name="city" class="form-control" id="city">
+                                            <!--<option value="枣庄市">枣庄市</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mtop12">
+                                <label for="">项目阶段：</label>
+                                <small>(项目进展程度,参与人数，若需要融资，融资的数额:万)</small>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <select name="stage" class="form-control" id="stage">
+                                            <option value="初步想法">初步想法</option>
+                                            <option value="调研准备">调研准备</option>
+                                            <option value="产品研发">产品研发</option>
+                                            <option value="上线运营">上线运营</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" name="num"
+                                               value="{$project.num}" placeholder="参与人数">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" name="needmoney"
+                                               value="{$project.needmoney}" placeholder="需要融资数额">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mtop12">
+                                <label for="">项目介绍：</label>
+                                <small>(项目的特点及规划情况)</small>
+
+                                <textarea name="intro" rows="5" class="form-control">{$project.intro}</textarea>
+
+                            </div>
+                            <div class="mtop12">
+                                <label for="">演示地址：</label>
+                                <small>请输入一个链接</small>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="url" class="form-control" name="demourl"
+                                               value="{$project.demourl}" placeholder="链接地址">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mtop12">
+                                <label for="">寻找合伙人类型：</label>
+                                <small></small>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="hidden" class="form-control" name="partnertype" id="pt" value="{$project.partnertype}">
+
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="..." id="label1">
+                                            <button type="button" class="btn btn-default">创始人</button>
+                                            <button type="button" class="btn btn-default">营销运营</button>
+                                            <button type="button" class="btn btn-default ">策划设计师</button>
+                                            <button type="button" class="btn btn-default">技术工程师</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mtop12">
+                                <label for="">项目标签：</label>
+                                <small>(为项目添加特色标签)</small>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="ptag"
+                                               value="{$project.ptag}" placeholder="点击添加标签">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mtop12 text-center">
+                                <input type="submit" class="btn btn-success" value="确认修改" id="savebase">
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $("#editproject").addClass('active');
+
+    $(document).ready(function () {
+        $('#pt').val("{$project.partnertype}"); //重要
+        //合伙人默认
+        var label = "{$project.partnertype}".split(";");
+        var len = label.length;
+        var obj = $('#label1').children();
+        var objlen = obj.length;
+
+         for(var i =0;i!=objlen;i++){
+            for(var j =0;j!=len;j++){
+                 if(obj.eq(i).text()==label[j]){
+                    obj.eq(i).addClass('active');
+                    break;
+                 }
+            }
+         }
+        //合伙人类型
+        $('#label1').children().click(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                var old = $('#pt').val();
+                var value = $(this).text();
+                old = old.replace(value + ";", "");
+                $('#pt').val(old);
+
+            } else {
+                $(this).addClass('active');
+                var old = $('#pt').val();
+                var value = $(this).text();
+                $('#pt').val(old + value + ";");
+            }
+
+        });
+        //默认值显示
+        $("#ptype  option[value='{$project.ptype}'] ").attr("selected", true);
+        $("#stage  option[value='{$project.stage}'] ").attr("selected", true);
+        $.initProv("#pro", "#city", "{$project.province}", "{$project.city}");
+
+        //    TODO select default value
+
+        $("#savebase").on('click', '', function (event) {
+            event.preventDefault();
+            var provId = $("select[name='province']").val();
+            var cityId = $("select[name='city']").val();
+
+            var province = $._cityInfo[provId].n;
+            var city = $._cityInfo[provId].c[cityId];
+
+            $("select[name='province']").find("option:selected").val(province);
+            $("select[name='city']").find("option:selected").val(city);
+
+            $("form").submit();
+        });
+
+        $("#headpic").on('click', '', function (event) {
+            event.preventDefault();
+            $("input[name='logo']").click();
+
+        });
+
+        $("input[name='logo']").on('change', '', function (event) {
+            event.preventDefault();
+            var files = this.files;
+            var file = files[0];
+            var reader = new FileReader();
+
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                img = this.result;
+                console.log(img);
+                $("#headpic").attr('src', this.result);
+            };
+        });
+    });
+
+</script>

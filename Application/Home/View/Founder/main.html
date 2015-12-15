@@ -1,0 +1,208 @@
+<!--Geethin Tech! code by NilTor on 2015/10/16
+Email:admin@geethin.com
+intro:合伙人主要内容-->
+<div class="container">
+    <!--搜索筛选-->
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                搜索/筛选合伙人
+            </div>
+            <div class="panel-body">
+                <!--搜索框-->
+                <form action="__MODULE__/Founder/index" method="post">
+                    <div class="row">
+                        <div class="col-md-8" style="padding-right:0">
+                            <input type="text" class="form-control" placeholder="姓名,简介内容" name="search"
+                                   value="{$Think.post.search}">
+                        </div>
+                        <div class="col-md-4" style="padding-left:5px">
+                            <button class="btn btn-primary form-control" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </form>
+                <!--筛选内容-->
+                <div class="line"></div>
+                <form action="__MODULE__/Founder/index" method="post" id="screening">
+                    <div class="" style="margin-bottom: 20px">
+                        <h4>角色类型</h4>
+                        <select name="type" class="form-control" id="type">
+                            <option value="不限">不限</option>
+                            <option value="创始人">创始人</option>
+                            <option value="执行者">执行者</option>
+                            <option value="营销运营">营销运营</option>
+                            <option value="策划设计师">策划设计师</option>
+                            <option value="技术工程师">技术工程师</option>
+                        </select>
+                    </div>
+                    <h4>居住地区</h4>
+
+                    <div class="row" style="margin-bottom: 4px">
+                        <div class="col-md-4" style="padding-right:0;line-height: 2em">
+                            <label for="">省/直辖市</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <select name="province" class="form-control" id="pro">
+                                <option value="all">不限</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 20px">
+                        <div class="col-md-4" style="padding-right:0;line-height: 2em">
+                            <label for="">市/地级市</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="city" class="form-control" id="city">
+                                <option value="all">不限</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" name="agegroup" value="不限" id="agehide">
+
+                    <div style="margin-bottom: 15px" id="agegroup">
+                        <h4>选择年龄</h4>
+                        <span class="label label-default" style="cursor: pointer;">不限</span>
+                        <span class="label label-warning" style="cursor: pointer;">75后</span>
+                        <span class="label label-info" style="cursor: pointer;">80后</span>
+                        <span class="label label-primary" style="cursor: pointer;">85后</span>
+                        <span class="label label-success" id="90" style="cursor: pointer;">90后</span>
+                    </div>
+
+                    <button class="btn btn-success form-control" id="save" type="submit">筛选</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!--内容显示列表-->
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <volist name="founder" id="vo" empty="没有数据">
+                <div class="panel-body" style="padding:10px 0;border-bottom:1px solid #d8d8d8;">
+                    <div class="col-md-3 text-center" style="padding-left: 0">
+                        <php>
+                            if(empty($vo['headpic'])){
+                        </php>
+                        <div class="headpic-default">
+                            <span class="">{$vo.username|mb_substr=0,1,"utf-8"|strtoupper}</span>
+                        </div>
+                        <php>}else{</php>
+                        <img src="__ROOT__/Uploads/headpic{$vo.headpic}" alt="" class="headpic">
+                        <php>}</php>
+                        <div class="mtop1">
+                            <span class="label label-primary">{$vo.username|mb_substr=0,12}</span>
+                            <php>
+                                if($vo['sex']=='男'){
+                            </php>
+                            <span class="label label-primary">男</span>
+                            <php>}else{</php>
+                            <span class="label label-danger">女</span>
+                            <php>}</php>
+
+                        </div>
+                    </div>
+                    <div class="col-md-7" style="padding-left: 0">
+                        <div class="intro">
+                            <p>
+                                {$vo.intro}
+                            </p>
+                        </div>
+                        <div class="mtop1" style="line-height: 1.8em">
+                            <span class="label label-success">{$vo.agegroup}</span>
+                            <span class="label label-primary">{$vo.type}</span>
+                            <span class="label label-primary">{$vo.province} {$vo.city}</span>
+                            <span class="label label-info">擅长:{$vo.advantage}</span>
+                            <span class="label label-info">加入时间:{$vo.reg_time}</span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <div style="height:104px">
+                            <a href="__MODULE__/Founder/detail?id={$vo.uid}" class="btn btn-sm btn-primary input-sm">
+                                详情
+                            </a>
+                            <br>
+                            <input type="hidden" name="id" value="{$vo.uid}">
+                            <input type="hidden" name="username" value="{$vo.username}">
+                            <button type="button" class="mtop1 btn btn-sm btn-danger input-sm follow" >关注
+                            </button>
+                            <br>
+                            <button class="mtop1 btn btn-sm btn-success input-sm" data-toggle="modal"
+                                    data-user="{$vo.username}" data-uid="{$vo.uid}"
+                                    data-target="#sendmsg">联系
+                            </button>
+                            <br>
+                        </div>
+                        <div class="mtop1 text-center">
+                        <span class="label label-warning">
+                            {$vo.last_login_time}
+                        </span>
+                        </div>
+
+                    </div>
+                </div>
+            </volist>
+            <include file="Blocks/modalsendmsg"/>
+
+        </div>
+                {$page}
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //筛选默认
+        $.initProvSerach("#pro", "#city", "{$Think.post.province}", "{$Think.post.city}");
+        $("#type  option[value='{$Think.post.type}'] ").attr("selected", true);
+
+        //初始化标签赋值
+        var obj = $("#agegroup").children().filter("span");
+        var len = obj.length;
+        for (var i = 0; i != len; i++) {
+            if (obj.eq(i).html() == "{$Think.post.agegroup}") {
+                obj.eq(i).css({"box-shadow": "0px 0px 1px 1px #323523"});
+                $("#agehide").val(obj.eq(i).html());
+            }
+        }
+        //标签取值
+        $("#agegroup").children().filter("span").click(function () {
+            var value = $(this).html();
+            $("#agehide").val(value);
+            $(this).css({"box-shadow": "0px 0px 1px 1px #323523"});
+            $(this).siblings().filter("span").css({"box-shadow": "0px 0px 0px 0px #323523"});
+        });
+
+        $(".follow").on('click', '', function (event) {
+            event.preventDefault();
+            var id = $(this).siblings("input[name='id']").val();
+            var username = $(this).siblings("input[name='username']").val();
+            //alert(id);
+            $.post(MOD_PATH+'/User/get_doFollowUser',{id:id,username:username},function(data){
+                alertInfo('info','',data['info']);
+
+            });
+            
+        });
+
+        $("#save").on('click', '', function (event) {
+            event.preventDefault();
+            var provId = $("select[name='province']").val();
+            var cityId = $("select[name='city']").val();
+
+            var province = $._cityInfoSerach[provId].n;
+            var city = $._cityInfoSerach[provId].c[cityId];
+
+            $("select[name='province']").find("option:selected").val(province);
+            $("select[name='city']").find("option:selected").val(city);
+            $("#screening").submit();
+        });
+
+    });
+
+
+</script>

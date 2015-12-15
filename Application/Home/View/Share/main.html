@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="col-md-8">
+        <ul class="nav nav-tabs">
+            <li id="topic"><a href="__CONTROLLER__/index?type=topic">话题分享</a></li>
+            <li id="blog"><a href="__CONTROLLER__/index?type=blog">博客分享</a></li>
+        </ul>
+
+        <div class="conetent">
+            <include file="$frag"/>
+        </div>
+    </div>
+    <!--本期话题,热门分享等-->
+    <div class="col-md-3">
+        <php>if(isset($hottopic)){</php>
+        <div class="panel panel-default">
+            <div class="panel-heading">最新话题</div>
+            <div class="panel-body">
+                <volist id="vo" name="newtopic">
+                    <p><a href="__MODULE__/Share/detailtopic?id={$vo.id}&uid={$vo.uid}">{$vo.content|subtext=14}</a></p>
+                </volist>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">热门分享</div>
+            <div class="panel-body">
+                    <volist id="vo" name="hottopic">
+                        <p><a href="__MODULE__/Share/detailtopic?id={$vo.id}&uid={$vo.uid}">{$vo.content|subtext=14}</a></p>
+                    </volist>
+
+                 <php>}else{</php>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">最新博客</div>
+                    <div class="panel-body">
+                        <volist id="vo" name="newblog">
+                            <p><a href="__MODULE__/Share/detailblog?id={$vo.id}&uid={$vo.uid}">{$vo.title|subtext=14}</a></p>
+                        </volist>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">热门分享</div>
+                    <div class="panel-body">
+
+                <volist id="vo" name="hotblog">
+                    <p><a href="__MODULE__/Share/detailblog?id={$vo.id}&uid={$vo.uid}">{$vo.title|subtext=14}</a></p>
+                </volist>
+                <php>}</php>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#{$active}").addClass('active');
+    });
+</script>

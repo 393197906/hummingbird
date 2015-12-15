@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>重置密码-蜂鸟创投</title>
+    <include file="Blocks/import"/>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <div class="row" style="padding:20px;">
+            <div class="container">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            重置密码-找回密码
+                        </div>
+                        <div class="panel-body">
+                            <form action="__MODULE__/User/doResetPwd" method="post">
+                                <label>新密码</label>
+                                <input type="password" class="form-control" placeholder="新密码" name="password">
+                                <br>
+                                <label>确认密码</label>
+                                <input type="password" class="form-control" placeholder="确认密码" name="repassword">
+                                <br>
+                                <button class="form-control btn btn-success" id="resetpwd">确认修改</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $("form").delegate('#resetpwd', 'click', function (event) {
+            event.preventDefault();
+            if (validate($("form"))) {
+                $("form").submit();
+            }
+        });
+    });
+</script>

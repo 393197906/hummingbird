@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录-蜂鸟创投</title>
+    <include file="Blocks/import"/>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <div class="row" style="padding:20px;">
+            <div class="container">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            用户登录
+                        </div>
+                        <div class="panel-body">
+                            <form action="__MODULE__/Index/doLogin" method="post">
+                                <label>用户名或邮箱</label>
+                                <input type="text" class="form-control" placeholder="用户名或邮箱" name="username">
+
+                                <br>
+                                <label>密码(<a href="__MODULE__/User/findpwd">忘记密码</a>)</label>
+                                <input type="password" class="form-control" placeholder="密码" name="password">
+                                <br>
+                                <button class="form-control btn btn-success" id="login">登录</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    var validata = new Array();
+    validata['username'] = /^[\u4e00-\u9fa5]{2,16}$|^[\dA-Za-z_]{3,32}$/;
+    validata['email'] = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+    validata['password'] = /^[A-Za-z0-9_\!\#\$\%\^\&\*\.\~]{6,32}$/;
+
+    $(document).ready(function () {
+        $("#login").on('click', '', function (event) {
+            event.preventDefault();
+            if(checkLogin()) {
+                $("form").submit();
+            }
+        });
+    });
+
+    function checkLogin() {
+        var username = $("input[name='username']");
+        var password = $("input[name='password']");
+        var re=true;
+
+        if (validata['username'].test(username.val()) || validata['email'].test(username.val())) {
+            username.tooltip('hide');
+        } else {
+            showtip(username,'用户名或邮箱格式不正确');
+            re=false;
+        }
+
+        if(validata['password'].test(password.val())) {
+            password.tooltip('hide');
+        }else {
+            showtip(password,'密码格式不正确');
+            re=false;
+
+        }
+        return re;
+    }
+
+    function showtip(select,emsg) {
+        select.attr("data-toggle", "tooltip");
+        select.tooltip({title: emsg, placement: 'right', trigger: 'click', container: 'body'});
+        select.tooltip('show');
+    }
+</script>

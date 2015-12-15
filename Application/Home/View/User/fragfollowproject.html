@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+    <div class="panel-heading">关注的项目</div>
+    <div class="panel-body">
+        <volist name="project" id="vo">
+        <div class="col-md-4">
+            <div class="follow-man">
+                <div class="col-md-5 text-center" style="padding:2px">
+                    <a href="">
+                        <php>
+                            if(empty($vo['logo'])){
+                        </php>
+                        <a href="__MODULE__/Project/detail?id={$vo.id}" target="_blank"><div class="headpic-default96">
+                            <span class="">{$vo.pname|mb_substr=0,1,"utf-8"|strtoupper}</span>
+                        </div></a>
+                        <php>}else{</php>
+                        <a href="__MODULE__/Project/detail?id={$vo.id}" target="_blank"><img src="__ROOT__/Uploads/projectpic{$vo.logo}" alt="" class="img96"></a>
+                        <php>}</php>
+                        <span class="label label-primary">{$vo.pname}</span>
+                    </a>
+
+                </div>
+                <div class="col-md-7">
+                    <div style="height:100px;">
+                        <p><span class="label label-danger"> {$vo.ptype}</span></p>
+
+                        <p>
+                            <span class="label label-primary">{$vo.partnertype}</span>
+                        </p>
+                        <p>
+                            <span class="label label-info">
+                                {$vo.province} {$vo.city}
+                            </span></p>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn label label-warning" data-toggle="modal"
+                                data-id="{$vo.id}"
+                                data-target="#follow" id="cancel">取消关注</button>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        </volist>
+        <include file="Blocks/modalfollowprojectcancel"/>
+    </div>
+</div>
+{$page}

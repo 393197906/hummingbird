@@ -1,0 +1,41 @@
+<input type="hidden" name="info"  value="investor">
+<br>
+<legend>投资信息</legend>
+<div style="margin-top:12px">
+    <label for="">投资机构</label>
+    <small> (机构名称,非机构留空)</small>
+    <div class="row">
+        <div class="col-md-8" style="padding-right:0">
+            <input type="text" class="form-control" name="institutionname" placeholder="机构名称">
+
+        </div>
+
+    </div>
+</div>
+
+<div style="margin-top:12px">
+    <label for="">投资金额</label>
+    <small>(投资资金范围，单位￥)</small>
+    <div class="row">
+        <div class="col-md-5" style="padding-right:0">
+            <select name="scale" class="form-control">
+                <option value="10-50万">10-50万</option>
+                <option value="50-200万">50-200万</option>
+                <option value="200-500万">200-500万</option>
+                <option value="500+万">500+万</option>
+            </select>
+
+        </div>
+
+    </div>
+</div>
+<div style="margin-top:12px">
+    <label for="">投资经历</label>
+    <small> (投资经历及投资理念)</small>
+    <textarea name="intro" rows="5" class="form-control" placeholder="投资经历及投资理念"></textarea>
+</div>
+
+<div class="text-right" style="margin-top:12px">
+    <button class="btn btn-success" id="savereg2" type="submit">提交信息</button>
+</div>
+

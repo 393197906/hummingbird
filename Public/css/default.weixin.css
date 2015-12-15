@@ -1,0 +1,166 @@
+/*等分按钮*/
+.btn-group-justified {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+
+	border-collapse: separate;
+}
+
+.btn-group-justified > .btn,
+.btn-group-justified > .btn-group {
+	background-color: #00b7ee;
+	color: white;
+	font-family: SimHei;
+	padding-top: 7px;
+	border-style: none;
+}
+
+.btn {
+	margin-bottom: 8px;
+	font-size: 18px;
+	border: 0px solid transparent;
+	border-radius: 0px;
+}
+
+body {
+	font-family: SimHei;
+	background-color: #d5d5d5; /*背景色 分割线颜色*/
+	line-height: normal;
+}
+
+div {
+	/*border: 1px dashed blue; /!*设置边框粗细,形式和颜色值 dashed（虚线） 设计用*!/*/
+}
+
+span {
+	/*border: 1px dashed red;*/
+}
+
+/*=========================header=====================================*/
+/*头部*/
+.gt-header {
+	background-color: #00b7ee;
+	padding: 8px 16px 8px 18px;
+	margin-bottom: 3px;
+}
+
+/*=========================body============================================*/
+/*项目列表*/
+.gt-area {
+	/*边距设置------------*/
+	/*上右下左*/
+	padding: 10px 16px 10px 18px;
+	background-color: white;
+	position: relative; /* 实现项目图标垂直居中 第一步 ：父元素相对布局 */
+}
+
+/* 实现项目图标垂直居中 第二步：设置绝对布局 */
+.gt-area img {
+	width: 60px;
+	height: 60px;
+	overflow: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	position: absolute;
+	top: 0;
+	/*left: 0;*/
+	bottom: 0;
+	/*right: 0;*/
+}
+
+/*-----------------------------*/
+
+/*项目列表内容区域*/
+.gt-subarea div,
+.gt-subarea-content {
+	margin-top: 3px;
+	margin-left: 70px;
+
+}
+
+/*实现溢出显示省略标记(...)*/
+.apostrophe {
+	white-space: nowrap; /*必须 1 强制在同一行内显示所有文本，直到文本结束或者遭遇 br对象*/
+	overflow: hidden; /*必须2 溢出隐藏*/
+	text-overflow: ellipsis; /*ie chome ff 测试通过 必须3当对象向内文本溢出时显示省略标记(...)*/
+}
+
+/*标题*/
+.gt-h1 {
+	font-size: 18px;
+}
+
+.gt-h2 {
+	color: #696969;
+	font-size: 14px;
+}
+
+.gt-h3 {
+	font-size: 18px;
+}
+
+/*时间*/
+.gt-time {
+	color: #696969;
+	font-size: 12px;
+
+	margin-top: -6px;
+}
+
+/*垂直分割线 | */
+.gt-fengexian {
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+/*bootstrap链接列表组*/
+.list-group-item {
+	padding: 0; /*内外父子元素重合*/
+}
+
+/*=========================footer=========================================*/
+
+.navbar-fixed-bottom {
+	bottom: 0;
+	margin-bottom: 0;
+	border-width: 0;
+}
+
+.user-row {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 1px;
+	background-color: white
+}
+
+.user-header {
+	background: url('../../Public/images/weixin/userbg.jpg') no-repeat 100% 100% ;
+}
+
+.pro-header{
+	background: url('../../Public/images/weixin/probg.jpg') no-repeat 100% 100% ;
+}
+
+
+.gt-dropmenu{
+	min-width: 140px;
+	font-size: 20px;
+	text-align: left;
+	background-color: white;
+	border-radius: 0px;
+	margin-right: 20px;
+	padding: 0px;
+}
+.gt-dropmenu > li > a{
+	padding: 10px 10px;
+}
+
+.gt-dropmenu .gt-divider{
+	margin: 0 0;
+}
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+

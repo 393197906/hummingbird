@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<include file="Blocks/import"/>
+	<title>{$title}</title>
+	<style>
+	td input{
+		width:100%;
+		height:100%;
+		/*border:1px solid red;*/
+	}
+	</style>
+</head>
+<body>
+	<div class="flex-grid">
+		<div class="row">
+			<div class="cell size12">
+				<h3>
+					专题管理 <small>SubjectControl</small>
+					<span class="mif-apps place-right"></span>
+				</h3>
+				<hr class="bg-grayLighter thin">
+				</div>
+		</div>
+
+		<div class="row">
+			<div class="cell size12">
+				<table class="table sortable-markers-on-left align-center border bordered hovered" id="table">
+					<thead>
+						<tr>
+							<th class="sortable-column sort-desc" style="width:5%;">ID</th>
+							<th class="sortable-column" style="width:27%;">名称</th>
+							<th class="sortable-column" style="width:14%;">模板</th>
+							<th class="sortable-column" style="width:25%;">子节点</th>
+							<th class="sortable-column" style="width:29%;">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<volist id="vo" name="subject">
+							<tr>
+								<td>{$vo.id}</td>
+								<td>{$vo.name}</td>
+								<td>{$vo.theme}</td>
+								<td>{$vo.class}</td>
+								<td>
+
+									<button class="button info rename" >编辑</button>
+									<button class="button danger delete" >删除</button>
+								</td>
+							</tr>
+						</volist>
+
+					</tbody>
+				</table>
+
+				<button class="button danger full-size" id="add"><span class="mif-plus"></span> 新增</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="cell size12">{$page}</div>
+		</div>
+	</div>
+
+	<include file="Blocks/alert-info" />
+</body>
+</html>
+<script>
+	$(document).ready(function() {
+		  var title = $('title').text();
+		  console.log(title);
+		  $('#'+title, window.parent.document).addClass('active').siblings().removeClass('active');  
+ 		
+		 //add
+        $("#add").click(function(){
+            $(this).hide();
+            var obj = $("#table tbody").children();
+            var val=obj.eq(obj.length-1).find('td').eq(0).text();
+            if(!val){
+                val = 0
+            }
+            $('#table').append("<tr><td>"+(parseInt(val)+1)+"</td><td><input type='text' name='addname' placeholder='专题名'></td><td><input type='text' name='addtheme' placeholder='模板（可留空）'></td><td><input type='text' name='addclass' placeholder='分类（可留空）'></td><td><button class='button primary' id='addsave'>保存</button> <button class='button warning ' id='addcancel'>取消</button></td></tr>");
+        })
+
+         $("#table").delegate("#addsave",'click',function(){
+            var valclass = $(this).parent().prev().find('input').val() ;
+            var valtheme = $(this).parent().prev().prev().find('input').val() ;
+            var valname = $(this).parent().prev().prev().prev().find('input').val() ;
+            $.post("__MODULE__/Content/doAddSubject",
+                    {
+                        name:valname,
+                        theme:valtheme,
+                        class:valclass
+                    },
+                    function(data){
+                    	getDialog(data['info']);
+                        if(data['status']==1){
+                            setTimeout(function(){
+                            	history.go(0)
+                            }, 1000);
+                        }
+                    });
+
+        })
+        $("#table").delegate("#addcancel",'click',function(){
+            history.go(0);
+        })
+
+         //edit
+        $(".rename").click(function(){
+            var valname = $(this).parent().prev().prev().prev().text();  //专题名
+            $(this).parent().prev().prev().prev().html("<input type='text' name='rename'  id='rename' value='"+valname+"'>");
+            var valtheme = $(this).parent().prev().prev().text();  //模板名
+            $(this).parent().prev().prev().html("<input type='text' name='theme'  id='theme' value='"+valtheme+"'>");
+            var valclass = $(this).parent().prev().text();//分类名
+            $(this).parent().prev().html("<input type='text' name='classname' id='classname'  value='"+valclass+"'>");
+            var newHtml = "<button class=\"button primary \" id='renamesave'>保存</button> <button class=\"button warning \" id='renamecancel'>取消</button>"
+            $(this).parent().html(newHtml); 
+
+        })
+
+        $("#table").delegate("#renamesave",'click',function(){
+            var id = $(this).parent().parent().find('td').eq(0).text();
+            var valname = $("#rename").val();
+            var valtheme = $("#theme").val();
+            var valclass = $("#classname").val();
+            $.post("__MODULE__/Content/editSubject",
+                    {    id:id,
+                        name:valname,
+                        theme:valtheme,
+                        class:valclass
+                    },
+                    function(data){
+                    	getDialog(data['info']);
+                        if(data['status']==1){
+                            setTimeout(function(){
+                            	history.go(0)
+                            }, 1000);
+                        }
+                    });
+
+        })
+
+        $("#table").delegate("#renamecancel",'click',function(){
+            history.go(0)
+        })
+
+        //delete
+        $(".delete").click(function(){
+            var id = $(this).parent().parent().find('td').eq(0).text();
+            $.post("__MODULE__/Content/doDeleteSubject",
+                    {
+                        id:id
+                    },
+                    function(data){
+                    	getDialog(data['info']);
+                        if(data['status']==1){
+	                        setTimeout(function(){
+                            	history.go(0)
+                            }, 1000);
+	                    }
+                    });
+        }) 
+
+        
+		
+	});
+	
+</script>

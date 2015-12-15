@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<include file='blocks:head'/>
+	<link rel="stylesheet" href="__PUBLIC__/css/default.weixin.css">
+	<title>编辑个人资料</title>
+	<style>
+		div {
+			text-align: center;
+			border: 1px dashed red;
+		}
+	</style>
+</head>
+<body>
+
+
+<form class="form-horizontal">
+
+	<div class="" style="text-align:right">
+		<a href="">保存</a>
+	</div>
+	<div style="margin-top: 0px">
+		<img class="img-circle" src="__PUBLIC__/images/weixin/zhanghu.png" alt="" width="120" height="120">
+	</div>
+
+	<div class="btn-group" data-toggle="buttons" style="margin-left: 40%;margin-top: 10px">
+		<label class="btn mybtn active">
+			<input type="radio" value="0" name="sex" autocomplete="off">男
+		</label>
+		<label class="btn mybtn">
+			<input type="radio" value="1" name="sex" autocomplete="off">女
+		</label>
+	</div>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-xs-2 control-label">昵称</label>
+		<div class="col-xs-10">
+			<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-xs-2 control-label">出生日期</label>
+		<div class="col-xs-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-xs-2 control-label">位置</label>
+		<div class="col-xs-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-xs-2 control-label">位置</label>
+		<div class="col-xs-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-xs-2 control-label">工作经验</label>
+		<div class="col-xs-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword3" class="col-xs-2 control-label">个人简介</label>
+		<div class="col-xs-10">
+			<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+		</div>
+	</div>
+
+	<!--<div class="form-group">-->
+		<!--<div class="col-xs-offset-2 col-xs-10">-->
+			<!--<button type="submit" class="btn btn-default">Sign in</button>-->
+		<!--</div>-->
+	<!--</div>-->
+</form>
+
+
+
+
+</body>
+<script>
+	$(document).ready(function () {
+		$("#edit").on('click', '', function (event) {
+			event.preventDefault();
+			var self = $(this);
+			$.post('__CONTROLLER__/doEdit', self.serialize(), success, "json");
+
+			function success(data) {
+				if (data.status) {
+					location.href = data.url;
+				} else {
+					alert(data.info);
+				}
+			}
+		});
+	});
+</script>
+</html>

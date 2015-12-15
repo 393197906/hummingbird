@@ -1,0 +1,18 @@
+.leftnav {
+    background: #262626;
+    color: #aaa;
+}
+
+.sidebar{
+			height:2500px;
+			background-color:#e8e8e8;
+			position: fixed;
+			top:51px;
+			left:0px;
+
+		}
+
+.title{
+	border-bottom: 1px solid #ce352c;
+}
+		}

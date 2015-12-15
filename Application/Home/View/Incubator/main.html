@@ -1,0 +1,137 @@
+<!--Geethin Tech! code by NilTor on 2015/11/25
+Email:admin@geethin.com
+intro:园区孵化主要内容-->
+<!--TODO 将内容改成园区孵化-->
+<div class="container">
+    <!--搜索筛选-->
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                搜索/筛选 孵化园
+            </div>
+            <div class="panel-body">
+                <!--搜索框-->
+                <form action="__MODULE__/Incubator/index" method="post">
+                    <div class="row">
+                        <div class="col-md-8" style="padding-right:0">
+                            <input type="text" class="form-control" placeholder="园区名称" name="search" value="{$Think.post.search}">
+                        </div>
+                        <div class="col-md-4" style="padding-left:5px">
+                            <button class="btn btn-primary form-control" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </form>
+                <!--筛选内容-->
+                <div class="line"></div>
+                <form action="__MODULE__/Incubator/index" method="post" id="screening">
+                    <div class="" style="margin-bottom: 20px">
+                        <h4>园区类型</h4>
+                        <select name="type" class="form-control" id="type">
+                            <option value="不限">不限</option>
+                            <option value="政府">政府</option>
+                            <option value="企业">企业</option>
+                            <option value="个人">个人</option>
+                        </select>
+                    </div>
+                    <h4>园区所在地</h4>
+
+                    <div class="row" style="margin-bottom: 4px">
+                        <div class="col-md-4" style="padding-right:0;line-height: 2em">
+                            <label for="">省/直辖市</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <select name="province" class="form-control" id="pro">
+                                <option value="all">不限</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 20px">
+                        <div class="col-md-4" style="padding-right:0;line-height: 2em">
+                            <label for="">市/地级市</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="city" class="form-control" id="city">
+                                <option value="all">不限</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-success form-control" id="save" type="submit">筛选</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!--内容显示列表-->
+    <div class="col-md-9">
+        <div class="row">
+            <volist name="incubator" id="vo">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <a href="__MODULE__/Incubator/detail?id={$vo.id}">
+                            <img src="__ROOT__/Uploads/incubatorpic{$vo.logo}" alt="{$vo.name}" style="height:160px;">
+                        </a>
+                        <div class="caption">
+                            <a href="__MODULE__/Incubator/detail?id={$vo.id}" style="color:black;">
+                                <span style="font-size:16px">{$vo.name|mb_substr=0,13,'utf-8'}</span>
+
+                            </a>
+                            <br>
+                            <strong class="text-danger">{$vo.favourpolicy}</strong>
+                            <br>
+                            <span class="text-info">{$vo.condition}</span>
+                            <div style="margin-top:4px;">
+                                <span class="label label-primary">{$vo.type}</span>&nbsp;
+                                <span class="">
+                                    评价(
+                                    <strong class="text-danger">{$vo.commentnumber}</strong>)
+                                </span>
+                                &nbsp;&nbsp;
+                                <small class="text-muted">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                    {$vo.province} {$vo.city}
+                                </small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </volist>
+
+
+        </div>
+
+
+
+        {$page}
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //筛选默认
+        $.initProvSerach("#pro", "#city", "{$Think.post.province}", "{$Think.post.city}");
+        $("#type  option[value='{$Think.post.type}'] ").attr("selected", true);
+
+
+    });
+
+    $("#save").on('click', '', function(event) {
+        event.preventDefault();
+        var provId = $("select[name='province']").val();
+        var cityId = $("select[name='city']").val();
+
+
+        var province = $._cityInfoSerach[provId].n;
+        var city = $._cityInfoSerach[provId].c[cityId];
+
+        $("select[name='province']").find("option:selected").val(province);
+        $("select[name='city']").find("option:selected").val(city);
+
+        $("#screening").submit();
+    });
+</script>

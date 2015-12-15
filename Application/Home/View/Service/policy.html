@@ -1,0 +1,78 @@
+<div class="container" style="height:12px;"></div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">推荐阅读</div>
+                <div class="panel-body  text-center recommend">
+                    <volist name="recommendarticle" id="vo">
+                        <h3><a href="__MODULE__/Service/article?id={$vo.id}" style="color:black">
+                            <p>{$vo.title|subtext=30}</p>
+                        </a></h3>
+
+                    </volist>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">法务信息</div>
+                        <div class="panel-body">
+                            <ul class="info" style="padding:0">
+                                <volist name="fwxx" id="vo"  empty="暂无内容">
+                                    <li><a href="__MODULE__/Service/article?id={$vo.id}"
+                                           style="color:black">{$vo.title}</a></li>
+                                </volist>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">创业政策</div>
+                        <div class="panel-body">
+                            <ul class="info" style="padding:0">
+                                <volist name="cyzc" id="vo"  empty="暂无内容">
+                                    <li><a href="__MODULE__/Service/article?id={$vo.id}"
+                                           style="color:black">{$vo.title}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h4>热点内容</h4>
+
+            <div class="list-group ">
+
+                <volist name="hotarticle" id="vo" empty="暂无内容">
+                    <a href="__MODULE__/Service/article?id={$vo.id}" class="list-group-item">
+                        {$vo.title|subtext=14}
+                    </a>
+                </volist>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".list-group").children().eq(0).addClass("active");
+        $(".info").eq(0).children().eq(0).css({"font-size": '20px'});
+        $(".info").eq(1).children().eq(0).css({"font-size": '20px'});
+        $(".recommend").children().eq(0).find('a').css({"color":'red'});
+    })
+</script>

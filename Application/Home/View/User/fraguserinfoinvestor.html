@@ -1,0 +1,35 @@
+<div class="col-md-9">
+    <br>
+    <legend>基本信息</legend>
+    <div style="margin-top:12px">
+        <span>姓名：</span> {$user.realname}<br>
+        <span>性别：</span> {$user.sex}<br>
+        <span>年龄：</span>{$user.birthday} <br>
+        <span>联系方式：</span>{$user.phone} <br>
+        <span>地点：</span>{$user.province} {$user.city} <br>
+    </div>
+    <br>
+
+    <legend>投资信息</legend>
+
+    <div style="margin-top:12px">
+        <span>机构名称：</span>{$user.institutionname} <br>
+        <span>机构金额：</span>{$user.scale} <br>
+
+        <span>机构经历：</span>{$user.intro}<br>
+
+    </div>
+    <br>
+    <legend>偏好信息</legend>
+    <div style="margin-top:12px">
+        我的头像：
+
+        <img src="__ROOT__/Uploads/headpic{$user.headpic}" alt="" class="headpic">
+        <br>
+        <span>关注的项目类型：</span>{$user.wantproject} <br>
+        <span>目标创业者类型：</span> {$user.wantfounder}<br>
+        <span>目标穿业者参与方式：</span>{$user.wantstate} <br>
+    </div>
+
+</div>
+<div class="col-md-3"></div>

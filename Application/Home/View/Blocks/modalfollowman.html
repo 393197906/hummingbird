@@ -1,0 +1,27 @@
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="follow">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">关注</h4>
+            </div>
+            <div class="modal-body text-center">
+
+                <h3></h3>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#follow").on('show.bs.modal', function (event) {
+            var button   = $(event.relatedTarget);
+            var username = button.data('user');
+            var uid      = button.data('uid');
+            var modal    = $(this);
+            modal.find('.modal-body h3').load('__MODULE__/User/get_doFollowUser?id='+uid+'&username='+username);
+        });
+    });
+</script>

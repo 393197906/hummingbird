@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file='blocks:head'/>
+    <title>登陆</title>
+    <style>
+
+        .login-row {
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body style="background-image:url('__PUBLIC__/images/weixin/beijing.jpg');background-repeat: no-repeat;background-size: cover">
+<div class="container-fluid">
+    <form class="form-login" action="__SELF__" method="post" style="margin-top: 40%;">
+        <div class="row login-row">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" id="inputUsername" class="form-control" placeholder="用户名" name="username">
+                </div>
+            </div>
+        </div>
+
+        <div class="row login-row">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="text" id="inputPassword" class="form-control" placeholder="密码" name="password">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <button type="submit" class="btn btn-primary btn-block">登 陆</button>
+            </div>
+        </div>
+
+        <div class="row text-center" style="margin-top: 70px;">
+            <div class="col-xs-6">
+                <a href="{:U('User/register')}" style="color: white;font-size: 14px">立即注册</a>
+            </div>
+            <div class="col-xs-6">
+                <a href="{:U('User/findPwd')}" style="color: white;font-size: 14px">忘记密码</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<include file="Blocks/import"/>
+	<title>{$title}</title>
+</head>
+<body>
+
+	<div class="flex-grid">
+		<div class="row">
+			<div class="cell size12">
+				<h3>
+					{$tag}
+					<span class="mif-{$icon} place-right"></span>
+				</h3>
+				<hr class="bg-grayLighter thin"></div>
+		</div>
+
+		<div class="row">
+			<div class="cell size12">
+				<table class="table sortable-markers-on-left align-center border bordered hovered">
+					<thead>
+						<tr>
+							<th class="sortable-column sort-desc" style="width:5%;">ID</th>
+							<th class="sortable-column" style="width:14%;">用户</th>
+							<th class="sortable-column" style="width:14%;">类型</th>
+							<th class="sortable-column" style="width:14%;">邮箱</th>
+							<th class="sortable-column" style="width:14%;">省份</th>
+							<th class="sortable-column" style="width:14%;">注册时间</th>
+							<th class="sortable-column" style="width:25%;">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<volist id="vo" name="user">
+							<tr>
+								<td>{$vo.id}</td>
+								<td>{$vo.username}</td>
+								<td>{$vo.type}</td>
+								<td>{$vo.email}</td>
+								<td>{$vo.province}</td>
+								<td>{$vo.reg_time|date="Y/m/d",###}</td>
+								<td>
+									<a href="__ROOT__/index.php/Home/{$title}/detail?id={$vo.id}" target="_blank">
+										<button class="button primary btn">查看</button>
+									</a>
+									<button class="button success btn">发信息</button>
+
+									<div class="dropdown-button">
+										<button class="button danger dropdown-toggle">更多</button>
+										<ul class="split-content d-menu place-right" data-role="dropdown">
+											<li>
+												<a href="__MODULE__/User/doDelete">删除</a>
+											</li>
+										</ul>
+									</div>
+
+								</td>
+							</tr>
+						</volist>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="cell size12">{$page}</div>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+	$(document).ready(function() {
+		  var title = $('title').text();
+		  console.log(title);
+		  $('#'+title, window.parent.document).addClass('active').siblings().removeClass('active');
+	
+	});
+</script>

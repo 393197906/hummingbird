@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>蜂鸟创投</title>
+    <include file="Blocks/import"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="jumbotron jumbg1" style="margin-bottom: 0;border-radius: 0;color:white">
+                <div class="container">
+                    <div class="col-md-8">
+                        <h1 style="font-size:50px">
+                            蜂鸟创投在做什么？
+                        </h1>
+
+                        <p style="font-size:20px">
+                            蜂鸟创投是以人才为核心，围绕人才，打造团队，匹配项目，提供各种资源支持，
+                            帮助真正有才能的人完成他们的梦想，为社会创造价值，让世界变得更加美好！
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <form action="__MODULE__/Reg/doReg" method="post">
+                            <input type="hidden" name="check" value="check">
+                            <input type="text" class="form-control input-lg" placeholder="用户名"
+                                   style="margin-bottom:6px;" name="username">
+                            <input type="email" class="form-control input-lg" placeholder="邮箱"
+                                   style="margin-bottom:6px;" name="email">
+                            <input type="password" class="form-control input-lg" placeholder="密码"
+                                   style="margin-bottom:6px;" name="password">
+
+                            <div class="" style="margin-bottom:6px">
+                                <small class="tiptext">
+                                    请输入至少6位以上的密码，且不要使用纯数字！
+                                </small>
+                            </div>
+
+                            <button type="submit" class="form-control input-lg btn btn-success btn-lg"
+                                    style="margin-bottom:6px" id="reg">注册加入
+                            </button>
+                            <div class="">
+                                <small class="tiptext">
+                                    点击注册加入，即表示您同意了我们的
+                                    <a href="__MODULE__/Index/servicepolicy">服务政策</a>
+                                    与<a href="__MODULE__/Index/privacypolicy">隐私政策!</a>
+                                </small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="jumbotron jumbg2" style="margin-bottom:0;border-radius: 0;color:white">
+                <div class="container">
+                    <div class="col-md-12 text-center">
+                        <h2 style="">
+                            你将在这里得到什么？
+                        </h2>
+
+                        <p class="" style="font-size:18px">
+                            进一步认知了解自己，能够确切的清楚自己喜欢什么，能做什么。 <br>
+                            找寻志同道合的人，交流了解，成为朋友，组建团队。 <br>
+                            确立方向目标，制定项目规划，做好创业的准备工作。 <br>
+                            找寻各种资源的支持，努力奋斗，踏上创业的路途！ <br>
+                            分享自己的经历心得，不断攀登更高的山峰！
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="jumbotron" style="border-radius: 0;">
+                <div class="container">
+                    <div class="col-md-12 text-center">
+                        <h2 style="">
+                            为什么你会爱上这里？
+                        </h2>
+
+                        <p style="font-size:18px">
+                            这里将成为人才（包括你自己）的聚集地，你将不再孤独，更快的提高自己。<br>
+                            这是一个平等自由，充满创新的世界。你的行为和结果定义了独一无二
+                            的你，而不是你的出身、荣誉或财富。 <br>
+                            不管现在的你是怎样的迷茫和无助，不妨给自己一个机会，行动起来，无怨无悔！<br>
+                            在这里，你将找到人生的方向，实现自我的价值，同时收获财富，帮助更多的人！
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+    </div>
+</div>
+</body>
+</html>
+<script>
+
+    $(document).ready(function () {
+        $("#reg").on('click', '', function (event) {
+            event.preventDefault();
+            if (validate($("form"))) {
+                $("form").submit();
+            }
+        });
+    });
+</script>

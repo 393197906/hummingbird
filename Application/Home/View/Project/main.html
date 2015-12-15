@@ -1,0 +1,213 @@
+<!--Geethin Tech! code by NilTor on 2015/10/22-->
+<!--Email:admin@geethin.com-->
+<!--intro:项目页面-->
+<div class="container">
+    <!--搜索筛选-->
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                搜索/筛选项目
+            </div>
+
+            <div class="panel-body">
+                <form action="__MODULE__/Project/index" method="post">
+                    <!--搜索框-->
+                    <div class="row">
+                        <div class="col-md-8" style="padding-right:0">
+                            <input type="text" class="form-control" placeholder="项目名称,简介内容" name="search"
+                                   value="{$Think.post.search}">
+                        </div>
+                        <div class="col-md-4" style="padding-left:5px">
+                            <button class="btn btn-primary form-control" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </form>
+                <!--筛选内容-->
+                <form action="__MODULE__/Project/index" method="post" id="screening">
+                    <div class="line"></div>
+                    <h4>项目类型</h4>
+                    <select name="ptype" id="ptype" class="form-control">
+                        <option value="热门" selected>热门</option>
+                        <option value="互联网+" >互联网+</option>
+                        <option value="科学研究">科学研究</option>
+                        <option value="科技制造">科技制造</option>
+                        <option value="互联网产品">互联网产品</option>
+                        <option value="物联网产品">物联网产品</option>
+                        <option value=""></option>
+                    </select>
+                    <!--默认显示热门分类-->
+                    <div class="project-secondtype mtop1">
+                        <span class="label label-danger">O2O</span>
+                        <span class="label label-danger">电子商务</span>
+                        <span class="label label-danger">社交</span>
+                        <span class="label label-danger">运动</span>
+                    </div>
+                    <div style="height:15px"></div>
+
+                    <h4>落地地区</h4>
+
+                    <div class="row" style="margin-bottom: 4px">
+                        <div class="col-md-4" style="padding-right:0;line-height: 2em">
+                            <label for="">省/直辖市</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <select name="province" class="form-control" id="pro">
+                                <option value="all">不限</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4" style="padding-right:0;line-height: 2em">
+                            <label for="">市/地级市</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="city" class="form-control" id="city">
+                                <option value="all">不限</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div style="height:15px"></div>
+                    <h4>项目阶段</h4>
+
+                    <input type="hidden" name="stage" value="不限" id="stagehide">
+                    <div id="stageSelect" style="line-height: 1.8em">
+                        <span class="label label-warning" style="cursor: pointer;">初步想法</span>
+                        <span class="label label-info" style="cursor: pointer;">调研准备</span>
+                        <span class="label label-success" style="cursor: pointer;">产品研发</span>
+                        <span class="label label-primary" style="cursor: pointer;">上线运营</span>
+                        <span class="label label-default" style="cursor: pointer;">不限</span>
+
+                    </div>
+                    <div style="height:15px"></div>
+                    <button class="btn btn-success form-control" id="save" type="submit">筛选</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--内容显示列表-->
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <volist name="project" id="vo" empty="没有数据">
+
+                <div class="panel-body" style="padding:10px 0;border-bottom:1px solid #d8d8d8;">
+
+                    <div class="col-md-3 text-center" style="padding-left: 0">
+                        <php>
+                            if(empty($vo['logo'])){
+                        </php>
+                        <div class="headpic-default">
+                            <span class="">{$vo.pname|mb_substr=0,1,"utf-8"|strtoupper}</span>
+                        </div>
+                        <php>}else{</php>
+                        <img src="__ROOT__/Uploads/projectpic{$vo.logo}" alt="" class="headpic">
+
+                        <php>}</php>
+
+                        <div class="mtop1">
+                            <span class="label label-primary">{$vo.pname}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-7" style="padding-left: 0">
+                        <div class="intro">
+                            <p>
+                                {$vo.intro|subtext=140}
+                            </p>
+                        </div>
+                        <div class="mtop1" style="line-height: 1.8em">
+                            <span class="label label-danger">{$vo.ptype}</span>
+                            <span class="label label-info">{$vo.location}</span>
+                            <span class="label label-info">{$vo.stage}</span>
+                            <span class="label label-success">需要:{$vo.partnertype}</span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <div style="height:104px">
+                            <a href="__MODULE__/Project/detail?id={$vo.id}" class="btn btn-sm btn-primary input-sm">
+                                详情
+                            </a>
+                            <br>
+                            <input type="hidden" name="id" value="{$vo.id}">
+                            <input type="hidden" name="uid" value="{$vo.uid}">
+                            <input type="hidden" name="pname" value="{$vo.pname}">
+                            <!-- <button type="button" class="mtop1 btn btn-sm btn-danger input-sm" data-toggle="modal"
+                                    data-id="{$vo.id}" data-uid="{$vo.uid}" data-pname="{$vo.pname}"
+                                    data-target="#follow">关注</button> -->
+                            <button type="button" class="mtop1 btn btn-sm btn-danger input-sm follow" >关注
+                            </button>
+                            <br>
+                        </div>
+                        <div class="mtop1 text-center">
+                        <span class="label label-warning">
+                            {$vo.updatetime}
+                        </span>
+                        </div>
+
+                    </div>
+                </div>
+            </volist>
+            <include file="Blocks/modalfollowproject"/>
+        </div>
+        {$page}
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //筛选默认
+        $.initProvSerach("#pro", "#city", "{$Think.post.province}", "{$Think.post.city}");
+
+        if('{$Think.post.ptype}'){
+            $("#ptype  option[value='{$Think.post.ptype}'] ").attr("selected", true);
+        }
+
+        //初始化标签赋值
+        var obj =$("#stageSelect").children();
+        var len= obj.length;
+        for(var i=0;i!=len;i++) {
+            if (obj.eq(i).html() == "{$Think.post.stage}") {
+                obj.eq(i).css({'box-shadow':'0px 0px 1px 1px #323523'});
+                $("#stagehide").val(obj.eq(i).html());
+            }
+        }
+        //标签取值
+        $("#stageSelect").children().click(function(){
+            var value = $(this).html();
+            $("#stagehide").val(value);
+            $(this).css({"box-shadow":"0px 0px 1px 1px #323523"});
+            $(this).siblings().css({"box-shadow":"0px 0px 0px 0px #323523"});
+        })
+
+
+        $(".follow").on('click', '', function (event) {
+            event.preventDefault();
+            var id = $(this).siblings("input[name='id']").val();
+            var uid = $(this).siblings("input[name='uid']").val();
+            var pname =$(this).siblings("input[name='pname']").val();
+            $.post(MOD_PATH+'/User/get_doFollowProject',{id:id,uid:uid,pname:pname},function(data){
+                alertInfo('info','',data['info']);
+
+            });
+
+        });
+
+
+    });
+
+    $("#save").on('click', '', function (event) {
+        event.preventDefault();
+        var provId = $("select[name='province']").val();
+        var cityId = $("select[name='city']").val();
+
+
+        var province = $._cityInfoSerach[provId].n;
+        var city     = $._cityInfoSerach[provId].c[cityId];
+        $("select[name='province']").find("option:selected").val(province);
+        $("select[name='city']").find("option:selected").val(city);
+        $("#screening").submit();
+    });
+</script>

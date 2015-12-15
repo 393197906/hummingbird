@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<include file="Blocks/import"/>
+	<title>{$title}</title>
+</head>
+<body>
+
+	<div class="flex-grid">
+		<div class="row">
+			<div class="cell size12">
+				<h3>
+					编辑文章<small> EditArticle</small>
+					<span class="mif-pencil place-right"></span>
+				</h3>
+				<hr class="bg-red thin"></div>
+		</div>
+  <form action="__MODULE__/Content/doEditArticle?id={$article.id}" id="article" method="post">
+		<div class="row">
+			<div class="cell size12">
+				<label for="">
+					<h4>
+						文章标题
+						<small>(为您的文章填写标题)</small>
+					</h4>
+				</label>
+				<div class="input-control text full-size ">
+					<input type="text"  name="title" placeholder="填写标题" value="{$article.title}"></div>
+				<div class="row">
+					<div class="cell size6 padding10 no-padding-top no-padding-bottom no-padding-left">
+						<label for="">
+							<h4>
+								文章专题
+								<small>(为您的文章选择专题)</small>
+							</h4>
+						</label>
+						<div class="input-control select full-size">
+							<select name="subject"  id="subject">
+								<volist name="subject" id="vo">
+                            <option value="{$vo.name}">{$vo.name}</option>
+                        </volist>
+							</select>
+						</div>
+					</div>
+					<div class="cell size6 padding10 no-padding-top no-padding-bottom no-padding-right">
+						<label for="">
+							<h4>
+								专题分类
+								<small>(子节点)</small>
+							</h4>
+						</label>
+						<div class="input-control select full-size">
+							<select name="classname" id="classname">
+								<volist id="vo" name="class">
+									<option value="{$vo}">{$vo}</option>
+								</volist>
+							</select>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="cell size6 padding10 no-padding-top no-padding-bottom no-padding-left">
+						<label for="">
+							<h4>
+								关键字
+								<small>(填写关键字)</small>
+							</h4>
+						</label>
+						<div class="input-control text full-size ">
+							<input type="text"  name="keyword" id="keyword" value="{$article.keyword}" placeholder="填写关键字"></div>
+					</div>
+					<div class="cell size6 padding10 no-padding-top no-padding-bottom no-padding-right">
+						<label for="">
+							<h4>
+								摘要
+								<small>(填写摘要)</small>
+							</h4>
+						</label>
+						<div class="input-control text full-size ">
+							<input id="abstract" type="text" name="abstract" value="{$article.abstract}" placeholder="填写摘要"></div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="cell size12">
+						<label for="">
+							<h4>文章内容</h4>
+						</label>
+							<script id="editor" name="content" type="text/plain">
+                    </script>
+					</div>
+				</div>
+				<div class="row">
+					<div class="cell size12">
+						<button class="button primary full-size" type="submit" id="postarticle">保存</button>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="cell size12">
+						<a onclick="history.go(-1)"><button class="button danger full-size">返回</button></a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		</form>
+
+		<div class="row">
+			<div class="cell size12"></div>
+		</div>
+	</div>
+</body>
+</html>
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script>
+    $(document).ready(function(){
+        $("#subject  option[value='{$article.subject}'] ").attr("selected",true);
+        $("#classname  option[value='{$article.classname}'] ").attr("selected",true);   
+        $("#subject").focusout(function(){  
+            var value = $(this).val();
+            $.post("__MODULE__/Content/getClass",
+                    {
+                        name:value
+                    },
+                    function(data,status){
+                        $("#classname").html(data);
+                    });
+        })
+    });
+        	
+
+    var ue = UE.getEditor('editor');
+    ue.ready(function() {
+        //设置编辑器的内容
+        ue.setContent('{$article.content|htmlspecialchars_decode}');
+        //获取html内容，返回: <p>hello</p>
+        var html = ue.getContent();
+        //获取纯文本内容，返回: hello
+        var txt = ue.getContentTxt();
+    });
+</script>

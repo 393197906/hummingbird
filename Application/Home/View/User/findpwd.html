@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>找回密码-蜂鸟创投</title>
+    <include file="Blocks/import"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <div class="row" style="padding:20px;">
+            <div class="container">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            验证手机-找回密码
+                        </div>
+                        <div class="panel-body">
+                            <form action="__MODULE__/User/doCheckPhone" method="post">
+                                <label for="">请输入手机号</label>
+                                <input type="tel" class="form-control" name="phone"
+                                       placeholder="手机号">
+                                <br>
+                                <label for="">请输入验证码</label>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <input type="tel" class="form-control" name="captcha"
+                                               placeholder="验证码">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button class="btn btn-info form-control" id="getCaptcha"
+                                                type="button">获取验证码
+                                        </button>
+                                    </div>
+                                </div>
+                                <br>
+                                <input type="submit" class="btn btn-success form-control"
+                                       id="checkphone" placeholder=""
+                                       value="验证手机">
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var time = 60;
+
+    $(document).ready(function () {
+        $("form").delegate('#checkphone', 'click', function () {
+            event.preventDefault();
+            if (validate($("form"))) {
+                $("form").submit();
+            }
+
+        });
+
+        $("form").delegate('#getCaptcha', 'click', function (event) {
+            event.preventDefault();
+            doneCaptcha();
+        });
+    });
+    //手机短信验证
+    function doneCaptcha() {
+        phone   = $("input[name='phone']").val();
+        var reg = /^0?1[3|4|5|8|7][0-9]\d{8}$/;
+        if (reg.test(phone)) {
+            //alert("号码正确~");
+        } else {
+            alertInfo('info','','手机号码有误');
+            return;
+        }
+        //改变相关样式
+        $("input[name='phone']").attr("readonly", "readonly");
+
+        $("#getCaptcha").attr("disabled", "disabled");
+        $("#getCaptcha").css({"background": "gray"});
+
+        $.post(MOD_PATH + '/User/getCaptcha', {"phone": phone}, function (data) {
+            console.log(data);
+        });
+        //重新发送提示
+        intervalId = setInterval(reGetCaptcha, 1000);
+    }
+
+    function reGetCaptcha() {
+        var btnCaptcha = $("#getCaptcha");
+        btnCaptcha.html("重新发送" + time + "秒");
+        time--;
+        if (time < 0) {
+            clearInterval(intervalId);
+            $("input[name='phone']").removeAttr("readonly");
+            btnCaptcha.removeAttr("disabled", "disabled");
+            btnCaptcha.css({"background": "#31b0d5"});
+            btnCaptcha.html("获取手机验证码");
+            time = 60;
+        }
+    }
+</script>

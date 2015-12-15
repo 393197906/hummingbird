@@ -1,0 +1,93 @@
+<div class="row" style="padding:10px 0;
+background:#f1f1f1;margin-bottom:1px;">
+    <div class="container">
+        <div class="webname col-md-2" style="padding-right:0">
+            <a href="__ROOT__/" style="color:black">
+                <img src="__PUBLIC__/images/home/logo256.png" width="30px">
+                蜂鸟创投
+            </a>
+        </div>
+        <div class="nav col-md-7">
+            <ul>
+                <li>
+                    <a href="__MODULE__/Founder/index">合伙人</a>
+                </li>
+                <li>
+                    <a href="__MODULE__/Project/index">项目</a>
+                </li>
+                <li>
+                    <a href="__MODULE__/Investor/index">投资人</a>
+                </li>
+                <li>
+                    <a href="__MODULE__/Share/index">社区分享</a>
+                </li>
+                <li class="dropdown">
+                    <!--<a href="__MODULE__/Service/index">创业服务</a>-->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        创业服务
+                        <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="__MODULE__/Service/index?id=19">法律政策</a></li>
+                        <li><a href="__MODULE__/Incubator/index">园区孵化</a></li>
+                        <li role="separator" class="divider"></li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-md-3 text-right">
+            <php>if(!isset($_SESSION['user']['username'])){</php>
+            <a href="__MODULE__/Index/login" class="btn btn-sm btn-success">登录</a>
+            <a href="__MODULE__/Reg/reg" class="btn btn-sm btn-default">注册</a>
+            <php>}else{</php>
+            <div class="dropdown ">
+                <button class="btn btn-default" data-toggle="dropdown"
+                        id="usercenter" aria-haspopup="true" aria-expanded="true">
+                    {$Think.session.user.username|mb_substr=0,12}
+                    <php>
+                        if($_SESSION['msg']['totalnumber']!=0){
+                    </php>
+                        <span class="badge" style="background: #d70000;">
+                            {$Think.session.msg.totalnumber}
+                        </span>
+                    <php>}</php>
+
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="usercenter">
+                    <li><a href="__MODULE__/User/userinfo">
+                        <span class="iconfont icon-yonghuzhongxin"></span>
+                        用户中心</a>
+                    </li>
+                    <li><a href="__MODULE__/Msg/index">
+                        <span class="iconfont icon-xiaoxi"></span>
+                        我的消息
+                        <php>
+                            if($_SESSION['msg']['totalnumber']!=0){
+                        </php>
+                        <span class="badge" style="background: #d70000;">
+                            {$Think.session.msg.totalnumber}
+                        </span>
+                        <php>}</php>
+                    </a>
+                    </li>
+                    <li><a href="__MODULE__/MyShare/index">
+                        <span class="iconfont icon-share"></span>
+                        我的分享</a>
+                    </li>
+                    <li><a href="__MODULE__/Index/loginOut">
+                        <span class="iconfont icon-tuichu"></span>
+                        退出</a>
+                    </li>
+                </ul>
+            </div>
+            <php>}</php>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        我的项目
+    </div>
+    <div class="panel-body" style="background: #eee">
+        <volist name='myProject' id="vo">
+            <div class="col-md-2 text-center"
+                 style="box-shadow: 0 0 4px 1px #ddd;border-radius: 4px;background: #fafafa;padding-top:4px">
+                <a href="__MODULE__/Project/detail?id={$vo.id}" target="_blank">
+                    <img class="headpic" src="__ROOT__/Uploads/projectpic{$vo.logo}" alt="">
+                </a>
+                <br>
+
+                <p><span class="label label-primary">{$vo.pname}</span>
+                </p>
+
+                <p>
+                    <a class="label label-warning" href="__CONTROLLER__/editproject?id={$vo.id}">编辑</a>
+                    <a class="label label-danger" href="__CONTROLLER__/doDelproject?id={$vo.id}">删除</a>
+                </p>
+
+            </div>
+        </volist>
+    </div>
+
+</div>
+{$page}

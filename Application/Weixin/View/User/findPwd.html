@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file='blocks:head'/>
+
+    <title>找回密码</title>
+</head>
+<body>
+<div class="container-fluid">
+    <!-- 头部内容 -->
+    <div class="row" style="background-color: #00b7ee">
+
+        <div class="col-xs-1 text-left" style="padding-left:8px">
+            <a href="javascript:" onclick="javascript:history.back(-1)">
+                <span class="glyphicon glyphicon-menu-left" style="font-size: 30px"></span>
+            </a>
+        </div>
+        <div class="col-xs-10 text-center">
+            <span>找回密码</span>
+        </div>
+        <div class="col-xs-1 text-right">
+
+        </div>
+    </div>
+    <!-- 主体内容 -->
+    <div class="row">
+            <div class="col-xs-12" style="margin-top: 8px;padding:0">
+                <div class="col-xs-3 text-right" style="line-height: 36px;padding:0 4px">
+                    手机号
+                </div>
+                <div class="col-xs-9">
+                    <input class="form-control" type="text" name="phone"/>
+                </div>
+            </div>
+            <div class="col-xs-12" style="margin-top: 8px;padding:0">
+                <div class="col-xs-3 text-right" style="line-height: 36px;padding:0 4px">
+                    验证码
+                </div>
+                <div class="col-xs-5">
+                    <input class="form-control" type="text" name="phonecaptcha"/>
+                </div>
+                <div class="col-xs-4" style="padding:0">
+                    <button class="btn btn-primer" id="getCaptcha">
+                        获取验证码
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="text-center" style="margin-top: 10px">
+
+                <button class="btn btn-lg input-lg" id="check"
+                        style="width:94%">验证手机号码
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var time = 60;
+    var intervalId;
+    $(document).ready(function () {
+        $('#getCaptcha').on('click', '', function (event) {
+            event.preventDefault();
+            doneCaptcha();
+        });
+
+
+        $("#check").on('click', '', function (event) {
+            event.preventDefault();
+            var captcha = $("input[name='phonecaptcha']").val();
+            var phone = $("input[name='phone']").val();
+            console.log(captcha + phone);
+            $.post(MOD_PATH + "/Mobile/checkPhone", {phonecaptcha: captcha, phone: phone}, function (data) {
+                console.log(data);
+                dealReturn(data);
+            });
+
+        });
+    });
+
+    function doneCaptcha() {
+        phone = $("input[name='phone']").val();
+        var reg = /^0?1[3|4|5|8|7][0-9]\d{8}$/;
+        if (reg.test(phone)) {
+            //alert("号码正确~");
+        } else {
+            alert("手机号码有误!");
+            return;
+        }
+        //改变相关样式
+        $("input[name='phone']").attr("readonly", "readonly");
+
+        $("#getCaptcha").attr("disabled", "disabled");
+        $("#getCaptcha").css({"background": "gray"});
+
+        $.post(MOD_PATH + '/Mobile/getCaptcha', {"phone": phone}, function (data) {
+        })
+        //重新发送提示
+        intervalId = setInterval(reGetCaptcha, 1000);
+    }
+
+    function reGetCaptcha() {
+        var btnCaptcha = $("#getCaptcha");
+        btnCaptcha.html("重新发送" + time + "秒");
+        time--;
+        if (time < 0) {
+            clearInterval(intervalId);
+            $("input[name='phonecaptcha']").removeAttr("readonly");
+            btnCaptcha.removeAttr("disabled", "disabled");
+            btnCaptcha.css({"background": "#F3994F"});
+            btnCaptcha.html("获取手机验证码");
+            time = 60;
+        }
+    }
+</script>
+</html>

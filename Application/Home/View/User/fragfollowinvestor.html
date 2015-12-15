@@ -1,0 +1,55 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">关注的投资人</div>
+    <div class="panel-body">
+        <volist name="investor" id="vo">
+            <div class="col-md-4">
+                <div class="follow-man">
+                    <div class="col-md-5 text-center" style="padding:2px">
+                        <a href="">
+                            <php>
+                                if(empty($vo['headpic'])){
+                            </php>
+                            <a href="__MODULE__/Investor/detail?id={$vo.uid}" target="_blank"><div class="headpic-default96">
+                                <span class="">{$vo.username|mb_substr=0,1,"utf-8"|strtoupper}</span>
+                            </div></a>
+                            <php>}else{</php>
+                            <a href="__MODULE__/Investor/detail?id={$vo.uid}" target="_blank"><img src="__ROOT__/Uploads/headpic{$vo.headpic}" alt="" class="img96"></a>
+                            <php>}</php>
+                            <span class="label label-primary">{$vo.username}</span>
+                        </a>
+
+                    </div>
+                    <div class="col-md-7">
+                        <div style="height:100px;">
+                            <p><span class="label label-danger"> {$vo.type}</span></p>
+
+                            <p>
+                                <span class="label label-primary">{$vo.agegroup}</span>
+                            </p>
+                            <p>
+                            <span class="label label-info">
+                                {$vo.province} {$vo.city}
+
+                            </span></p>
+                        </div>
+
+                        <div>
+                            <!--<button class="btn label label-warning">取消关注</button>-->
+                            <button type="button" class="btn label label-warning" data-toggle="modal"
+                                    data-uid="{$vo.uid}" data-username="{$vo.username}"
+                                    data-target="#follow" id="cancel">取消关注</button>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </volist>
+        <include file="Blocks/modalfollowmancancel"/>
+
+    </div>
+</div>
+{$page}

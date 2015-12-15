@@ -1,0 +1,46 @@
+<div class="panel panel-default" style="border:none">
+    <div class="panel-body" style="padding:8px">
+        <div class="col-md-8">
+            <volist name="status" id="vo">
+                <div class="topic-row">
+                    <div class="pull-left">
+                        <img src="__ROOT__/Uploads/headpic{$headpic}" class="img64" alt="">
+
+                    </div>
+                    <div class="col-md-8">
+                        <strong>
+                            <span class="text-primary">{$Think.session.user.username}</span>
+                            &nbsp;&nbsp;
+                            <small class="text-muted">
+                                {$vo.posttime}
+                            </small>
+                        </strong>
+
+                        <p>
+                            <a href="__MODULE__/Share/detailtopic?id={$vo.id}&uid={$Think.session.user.id}"
+                               target="_blank" class="text-info"><span class="overword">{$vo.content}</span></a>
+                        </p>
+                    </div>
+                    <div class="pull-right">
+                        <span class="text-muted">
+                            <span class="iconfont icon-liulanliang" style="font-size: 18px"></span>
+                            {$vo.view}
+                        </span>
+                        <br>
+                        <span class="text-danger">
+                            <span class="iconfont icon-zan" style="font-size: 18px"></span>
+                            {$vo.approvenumber}
+                        </span>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+
+            </volist>
+        </div>
+
+    </div>
+</div>
+
+

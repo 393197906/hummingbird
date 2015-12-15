@@ -1,0 +1,85 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        已发消息
+    </div>
+    <div class="panel-body">
+        <volist name="sendedmsg" id="vo" empty="暂无消息">
+            <div class="msg-row">
+                <div class="pull-left">
+                    <php>
+                        if(empty($vo['headpic'])){
+                    </php>
+                    <div class="headpic-default64 text-center">
+                        {$vo.fromname|mb_substr=0,1,"utf-8"|strtoupper}
+                    </div>
+                    <php>}else{</php>
+                    <img src="__ROOT__/Uploads/headpic{$vo.headpic}" alt="" class="img64">
+                    <php>}</php>
+                </div>
+                <div class="col-md-9">
+                    <div style="margin-top: 8px">
+                        <input type="hidden" value="{$vo.id}" name="id">
+                        <a href="#" data-toggle="popover" data-content="{$vo.content}" class="msgtheme">
+                            <strong class="text-primary">{$vo.theme}</strong>
+                        </a>
+                    </div>
+
+                    <div class="mtop1">
+                        <span class="text-primary">{$vo.fromname}</span>
+                        在
+                        <small><strong>
+                            <span class="text-muted">{$vo.sendtime}</span>
+                        </strong></small>
+                        的消息
+                    </div>
+
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <php>
+                            if($vo['statu']==1){
+                        </php>
+
+                        <span class="label label-primary statu">未读</span>
+
+                        <php>}else{</php>
+                        <span class="label label-default statu">已读</span>
+                        <php>}</php>
+                    </div>
+                    
+                    <div class="mtop1">
+                        <input type="hidden" value="{$vo.id}" name="id">
+                        <a href="javascript:" class="delmsg">
+                            <span class="label label-danger">删除</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </volist>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        //显示具体内容，同时标记为已读
+        $(".msgtheme").popover();
+        //删除消息
+        $(".delmsg").on('click', '', function (event) {
+            event.preventDefault();
+            var id = $(this).siblings("input[name='id']").val();
+            $.post(CON_PATH + '/delMsgBySender', {id: id}, function (data) {
+                console.log(data);
+                if (data == "success") {
+                    alertInfo('info', '', '删除成功');
+
+                    location.reload();
+                }else{
+                    alertInfo('info', '', '删除失败');
+
+                }
+
+            });
+        });
+    });
+</script>

@@ -1,0 +1,6 @@
+Application/Runtime/
+.idea/
+README.md
+.project
+Uploads/
+Public/js/node_modules

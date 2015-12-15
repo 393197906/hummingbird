@@ -1,0 +1,115 @@
+<include file="Model/top"/>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+<form class="form-inline definewidth m20" action="__URL__/index" method="get">
+    创始人名称：
+    <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" >&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button"
+                                                                                  class="btn btn-success"
+                                                                                  id="addnew">新增创始人</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10" >
+    <thead>
+    <tr>
+        <th>头像地址</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>昵称</th>
+        <th>邮箱</th>
+        <th>性别</th>
+        <th>学历</th>
+        <th>工作经验</th>
+        <th>联系电话</th>
+        <th>个人介绍</th>
+        <th>入驻时间</th>
+        <th>状态</th>
+        <th>管理</th>
+    </tr>
+    </thead>
+    <volist name="Founder" id="vo">
+	     <tr>
+            <td>{$vo.logo}</td>
+             <td>{$vo.username}</td>
+             <td>{$vo.password}</td>
+             <td>{$vo.nickname}</td>
+             <td>{$vo.email}</td>
+             <td>
+                 <if condition="$vo.sex eq 1">
+                     男
+                 <else />
+                     女
+                 </if>
+             </td>
+             <td>{$vo.degree}</td>
+             <td>{$vo.experience}</td>
+             <td>{$vo.phone}</td>
+             <td>{$vo.introduction}</td>
+             <td>{$vo.time} </td>
+             <td>
+                 {$parameter}
+                 <if condition="$vo.status eq 1">
+                     <button type="button" class="btn btn-success">启 用</button>
+                     <a href="__CONTROLLER__/update?id={$vo.id}&status=0"><button type="button"
+                                                                                  class="btn btn-default">禁
+                         用</button></a>
+                     <else />
+                     <a href="__CONTROLLER__/update?id={$vo.id}&status=1"><button type="button"
+                                                                                  class="btn btn-default">启 用</button></a>
+                     <button type="button" class="btn btn-success">禁 用</button>
+                 </if>
+             </td>
+            <td>
+                  <a href="__CONTROLLER__/edit.html?id={$vo.id}">编辑</a>&nbsp;&nbsp;
+                <a href="__CONTROLLER__/delete?id={$vo.id}">删除</a>
+            </td>
+        </tr>
+    </volist>
+</table>
+<div class="inline pull-right page">
+    {$page}
+    </div>
+<include file="Model/footer"/>
+<script>
+    $(function () {
+        
+		$('#addnew').click(function(){
+
+				window.location.href="__CONTROLLER__/add.html";
+		 });
+
+
+    });
+
+	function del(id)
+	{
+		
+		
+		if(confirm("确定要删除吗？"))
+		{
+		
+			var url = "index.html";
+			
+			window.location.href=url;		
+		
+		}
+	
+	
+	
+	
+	}
+</script>

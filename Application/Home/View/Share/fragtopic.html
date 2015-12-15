@@ -1,0 +1,69 @@
+<volist name="topics" id="vo">
+    <div class="share-topic-row">
+        <div class="pull-left text-center" style="padding:4px">
+            <div class="pull-left">
+                <div>
+                    <span class="text-muted">{$vo.view}</span>
+                </div>
+
+                <div class="share-topic-label cur">
+                    <span class="iconfont icon-liulanliang text-muted" style="font-size:18px;"></span>
+                </div>
+            </div>
+            <div class="pull-left">
+                <div>
+                    <span class="text-success approvenumber">{$vo.rise}</span>
+                </div>
+                <div class="share-topic-label cur dolike">
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <span class="iconfont icon-zan text-success" style="font-size:18px;"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="col-md-2">
+                <a href="__MODULE__/Founder/detail?id={$vo.uid}" target="_blank">
+                    <img src="__ROOT__/Uploads/headpic{$vo.headpic}" alt="" class="img64">
+                </a>
+            </div>
+            <div class="col-md-10" style="overflow: hidden">
+                <span class="text-danger">
+                    [{$vo.type}]
+                </span>
+                &nbsp;&nbsp;
+                <a href="__MODULE__/Founder/detail?id={$vo.uid}" target="_blank">
+                    <span class="text-primary">
+                    <strong>{$vo.username}</strong>
+                </span>
+                </a>
+                <span class="text-muted">
+                    <small>{$vo.posttime}</small>
+                </span>
+
+                <p>
+                    <a href="__CONTROLLER__/detailtopic?id={$vo.id}&uid={$vo.uid}" target="_blank" class="text-info"><span class="overword">{$vo.content}</span></a>
+                </p>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</volist>
+{$page}
+<script>
+    $(document).ready(function () {
+        $(".dolike").on('click', '', function (event) {
+            event.preventDefault();
+            var approvenumber = $(this).parent().find(".approvenumber");
+            var id = $(this).find("input[name='id']").val();
+            $.post(MOD_PATH+'/User/doRise',{type:'topic',id:id},function(data){
+                alertInfo('info','',data['info']);
+                if(data['status'] == 1) {
+                    var num=approvenumber.html();
+                    approvenumber.html(++num);
+                }
+            })
+        });
+    });
+</script>

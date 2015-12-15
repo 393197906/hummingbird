@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>合伙人详情-蜂鸟创投</title>
+    <include file="Blocks/import" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="header">
+            <include file="Blocks/header" />
+        </div>
+        <div class="content">
+            <include file="Blocks/stayTuned" />
+            <div class="container">
+                <!--内容显示列表-->
+                <div class="col-md-9 col-md-offset-0">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="padding:10px 0">
+                            <div class="col-md-4">
+                                <php>
+                                    if(empty($incubator['logo'])){
+                                </php>
+                                <div class="headpic-default">
+                                    <span class="">{$incubator.name|mb_substr=0,1,"utf-8"|strtoupper}</span>
+                                </div>
+                                <php>}else{</php>
+                                <img src="__ROOT__/Uploads/incubatorpic{$incubator.logo}" class="img256" style="margin:0 auto">
+                                <php>}</php>
+
+                                <div class="mtop12">
+                                    <span class="mtop1 text-muted">
+                                        <span class="iconfont icon-liulanliang" style="font-size:18px"></span>
+                                        {$incubator.view}
+                                    </span>
+                                    &nbsp;&nbsp;
+                                    <span class="mtop1 text-danger cur" id="follow">
+                                        <span class="iconfont icon-zan" style="font-size:18px"></span>
+                                        {$incubator.rise}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h4>{$incubator.name}</h4>
+                                <p>优惠政策:{$incubator.favourpolicy}</p>
+                                <p>园区条件:{$incubator.condition}</p>
+                                <p>园区类型：{$incubator.type}</p>
+                                <p>联系方式：{$incubator.phone}</p>
+                                <p>详细地址：{$incubator.province} {$incubator.city} {$incubator.address}</p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="line" style="margin:10px 0 0 0"></div>
+                            <div class="col-md-12">
+                                <!-- <ul class="nav nav-tabs">
+                                    <li id="detail">
+                                        <a href="#" style="padding:4px 8px;">详情</a>
+                                    </li>
+                                    <li id="comment">
+                                        <a href="#" style="padding:4px 8px;">评论(12)</a>
+                                    </li>
+                                </ul> -->
+
+                                <div class="" id="incubator-content">
+                                    {$incubator.content|htmlspecialchars_decode}
+                                </div>
+
+                            </div>
+                            <!--<div class="clearfix"></div>-->
+                        </div>
+                    </div>
+                </div>
+                <include file="Blocks/modalsendmsg" />
+                <!--推荐园区-->
+                <div class="col-md-3">
+                    <h2>推荐园区</h2>
+                    <div class="list-group">
+                        <volist id="vo" name="recommend">
+                            <php>if($vo['id']==$_GET['id']){</php>
+                            <a href="__MODULE__/Incubator/detail?id={$vo.id}" class="list-group-item active">{$vo.name|subtext=15}</a>
+                            <php>}else{</php>
+                            <a href="__MODULE__/Incubator/detail?id={$vo.id}" class="list-group-item">{$vo.name|subtext=15}</a>
+                            <php>}</php>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <include file="Blocks/footer" />
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    $(document).ready(function() {
+        $("#follow").on('click', '', function (event) {
+            event.preventDefault();
+            var id            = "{$Think.get.id}";
+            $.post(MOD_PATH + '/User/doRise', {type: 'incubator', id: id}, function (data) {
+                alertInfo('info','',data['info']);
+                if (data["status"] == 1) {
+                    var num = $("#follow").text();
+                    console.log(num);
+                    $("#follow").html("<span class=\"iconfont icon-zan\" style=\"font-size:18px\"></span> "+(++num));
+                }
+            })
+        });
+
+    });
+</script>

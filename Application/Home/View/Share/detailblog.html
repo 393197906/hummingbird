@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>博客-蜂鸟创投</title>
+    <include file="Blocks/import"/>
+    <script type="text/javascript" src="__PUBLIC__/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css"/>
+    <style>
+        pre, code {
+            white-space: pre-wrap !important;
+            white-space: -moz-pre-wrap !important;
+            white-space: -o-pre-wrap !important;
+            Word-wrap: break-word !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <include file="Blocks/header"/>
+    <div class="header">
+    </div>
+    <div class="content">
+        <include file="Blocks/stayTuned"/>
+        <div class="container">
+            <div class="col-md-8">
+                <div class="well" style="display: table;padding:8px;width:100%">
+                    <div>
+                        <div class="col-md-3 text-center" style="padding:0;line-height:28px;">
+                        <span style="font-size:18px;">
+                            [{$blog.type}]
+                        </span>
+                        </div>
+                        <div class="col-md-9">
+                            <span class="text-primary" style="font-size:20px">
+                                <strong>
+                                    {$blog.title}
+                                </strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="line" style="margin:5px 0"></div>
+                    <div style="margin:8px 0;">
+                        <div class="col-md-2 text-center">
+                            <a href="__MODULE__/Founder/detail?id={$_GET['uid']}" target="_blank">
+                                <img src="__ROOT__/Uploads/headpic{$user.headpic}" alt="" class="img64">
+                            </a>
+                        </div>
+                        <div class="col-md-10 text-info">
+                            <span class="text-info">
+                                <strong>内容摘要:</strong>
+                            </span>
+                            <span class="text-muted">
+                                {$blog.content|strip_tags|mb_substr=0,140,'utf-8'}
+                            </span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="line" style="margin:2px 0 5px 0;border:1px solid #eaeaea"></div>
+                        <div class="col-md-2 text-center">
+                            <a href="__MODULE__/Founder/detail?id={$_GET['uid']}" target="_blank">
+                                <span class="text-danger">
+                                    <strong>{$user.username}</strong>
+                                </span>
+                            </a>
+
+                        </div>
+                        <div class="col-md-10" style="vertical-align:bottom;">
+                            <div class="pull-left">
+                            <span class="text-warning">
+                                {$blog.tag}
+                            </span>
+                                &nbsp;&nbsp;
+                                <small class="text-muted">
+                                    <strong>{$blog.posttime}</strong>
+                                </small>
+
+                            </div>
+                            <div class="pull-right text-danger">
+                                <span class="iconfont icon-liulanliang text-muted"></span>
+                                <span class="text-muted">{$blog.view}</span>
+                                &nbsp;&nbsp;
+                                <input type="hidden" name="id" value="{$blog.id}">
+                                <span class="iconfont icon-zan cur" id="dolike"></span>
+                                <span id="approvenumber">{$blog.rise}</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="line" style="margin:4px -8px"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div>{$blog.content}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 well">
+                <div>
+                    <form action="" method="post">
+                        <input type="hidden" name="targetid" value="{$user.id}">
+                        <input type="hidden" name="bid" value="{$blog.id}">
+                            <textarea name="content" class="form-control" rows="4"
+                                      style="resize:none" placeholder="评论内容"></textarea>
+
+                        <div class="mtop1 text-right">
+                            <input type="button" id="postcomment" class="btn btn-primary" value="发表评论">
+                        </div>
+                    </form>
+                </div>
+                <h4>评论内容:</h4>
+
+                <div class="" style="border:1px solid #ddd;background: #f1f1f1">
+
+
+                    <volist name="comments" id="vo" empty="暂无评论">
+                        <div style="padding:4px;border-bottom: 1px solid #ddd;display: table;width:100%">
+                            <div class="pull-left">
+                                <a href="__MODULE__/Founder/detail?id={$vo.uid}" target="_blank">
+                                    <img src="__ROOT__/Uploads/headpic{$vo.headpic}" alt="" class="img64">
+
+                                </a>
+                            </div>
+                            <div class="col-md-8" style="overflow: auto">
+
+                                <a href="__MODULE__/Founder/detail?id={$vo.uid}" target="_blank">
+                                        <span class="text-primary">
+                                            <strong>
+                                                {$vo.username}
+                                            </strong>
+                                        </span>
+                                </a>
+                                &nbsp;&nbsp;
+                                <small class="text-muted">
+                                    {$vo.commenttime}
+
+                                </small>
+                                <div class="text-info" id="content">{$vo.content|mb_substr=0,100,'utf-8'}
+                                </div>
+                            </div>
+                            <div class="pull-right text-danger" style="padding:0">
+                                <input type="hidden" name="id" value="{$vo.id}">
+                                <span class="iconfont icon-zan cur dolike" style="font-size:20px;"></span>
+                                <span class="approvenumber">{$vo.rise}</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </volist>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        SyntaxHighlighter.all();
+
+        $("#postcomment").on('click', '', function (event) {
+            event.preventDefault();
+            if (validate($("form"))) {
+                var targetid = $("input[name='targetid']").val();
+                var bid      = $("input[name='bid']").val();
+                var content  = $("textarea[name='content']").val();
+                if (content == "") {
+                    alertInfo('info','','内容不可为空');
+                }
+//                TODO 该方法地址有可能改变
+                $.post(MOD_PATH + '/User/doAddComment', {
+                    targetid: targetid,
+                    bid:      bid,
+                    content:  content,
+                    table:"blog_comment"
+                }, function (data) {
+                    console.log(data);
+                    if (data['status'] == 1) {
+                        $("textarea[name='content']").val("");
+                        location.reload();
+                    }
+
+                    alertInfo('info','',data['info']);
+                })
+            }
+        });
+
+        $("#dolike").on('click', '', function (event) {
+            event.preventDefault();
+            var approvenumber = $(this).siblings("#approvenumber");
+            var id            = $(this).siblings("input[name='id']").val();
+            $.post(MOD_PATH + '/User/doRise', {type: 'blog', id: id}, function (data) {
+                alertInfo('info','',data['info']);
+                if (data['status'] == 1) {
+                    var num = approvenumber.html();
+                    console.log(num);
+                    approvenumber.html(++num);
+                }
+            })
+        });
+
+//        评论点赞
+        $(".dolike").on('click', '', function (event) {
+            event.preventDefault();
+            var approvenumber = $(this).siblings(".approvenumber");
+            var id            = $(this).siblings("input[name='id']").val();
+            $.post(MOD_PATH + '/User/doRise', {type: 'blog_comment', id: id}, function (data) {
+                alertInfo('info','',data['info']);
+                if (data['status'] == 1) {
+                    var num = approvenumber.html();
+                    approvenumber.html(++num);
+                }
+            })
+        });
+    });
+</script>

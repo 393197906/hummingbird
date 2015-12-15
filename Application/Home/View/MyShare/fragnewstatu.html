@@ -1,0 +1,76 @@
+<div class="panel panel-default" style="border:none">
+    <div class="panel-body" style="padding:8px" ;>
+        <div class="newstatu">
+            <form action="" method="post">
+                <textarea name="content" rows="4" class="newstatu-content"
+                          placeholder="请输入您的状态"></textarea>
+                <div class="newstatu-control">
+                    <div class="pull-left">
+                        <div class="dropdown">
+                            <button class="btn btn-primary"
+                                    data-toggle="dropdown" style="border:none;" id="typechose">
+                                话题类型
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="statutype"><a href="">我的动态</a></li>
+                                <li class="statutype"><a href="">项目成果</a></li>
+                                <li class="statutype"><a href="">创业感悟</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <input type="button" value="清空" id="clearcontent" class="btn btn-primary btn-newstatu"><input type="button"
+                                                                                                    value="发布" class="btn btn-primary btn-newstatu" id="postdoing">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var topictype;
+    $(document).ready(function () {
+        $("#postdoing").on('click', '', function (event) {
+            event.preventDefault();
+            var content = $("textarea[name='content']").val();
+
+            $.post(CON_PATH + '/doAddTopic',{content:content,type:topictype},function(data){
+                if(data=="success") {
+                    alertInfo('info','','发布成功');
+                    clearContent();
+                }
+            });
+
+        });
+        $("#clearcontent").on('click', '', function (event) {
+            event.preventDefault();
+            clearContent();
+        });
+
+
+        $(".statutype").on('click', '', function (event) {
+            event.preventDefault();
+            topictype=$(this).find("a").html();
+            $("#typechose").html(topictype);
+
+            // var content=$("textarea[name='content']").val();
+            // var reg = new RegExp("#[\u4e00-\u9fa5]+# ([\u4e00-\u9fa5A-Za-z0-9]*)");
+            // if(reg.test(content)){
+            //     content = content.replace(reg,"#"+topictype+"# $1");
+            // }else{
+            //     content="#"+topictype+"# "+content;
+            // }
+            // $("textarea[name='content']").val(content);
+        });
+    });
+
+
+    function clearContent() {
+        $("textarea[name='content']").val("");
+    }
+</script>

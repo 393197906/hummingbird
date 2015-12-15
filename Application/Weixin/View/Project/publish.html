@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<head>
+	<include file='blocks:head'/>
+	<link rel="stylesheet" href="__PUBLIC__/css/default.weixin.css">
+
+	<title>发布项目</title>
+</head>
+<body>
+<div class="container-fluid">
+	<form>
+		<div class="row" style="background: url('__PUBLIC__/images/weixin/probg.jpg') no-repeat; background-size: 100% 100%;margin-bottom: 5px">
+			<div class="col-xs-12">
+				<div class="row">
+					<a href="javascript:history.go(-1)">
+						<div class="col-xs-2 text-center" style="padding-top: 10px">
+							<span style="color: white;"><i class="fa fa-angle-left fa-3x"></i></span>
+						</div>
+					</a>
+
+					<div class="col-xs-7"></div>
+					<a href="">
+						<div class="col-xs-3 text-center" style="padding-top: 17px">
+							<span style="font-size: 20px;color: white">发布</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="row" style="margin-top: 10px">
+					<div class="col-xs-12 text-center">
+						<img src="__PUBLIC__/images/weixin/chuangtouzaozhuang.png" width="90" height="90">
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;margin-bottom: 10px">
+					<div class="col-xs-3"></div>
+					<div class="col-xs-6 text-center">
+						<a href=""><span style="font-size: 20px;color: white">点击上传图像</span></a>
+					</div>
+					<div class="col-xs-3"></div>
+				</div>
+			</div>
+		</div>
+		<include file='blocks:publist'/>
+	</form>
+</div>
+
+</body>
+<script>
+	$(document).ready(function () {
+		$('#publish').on('click', '', function (event) {
+			event.preventDefault();
+
+			console.log($('form').serialize());
+
+			$.ajax({
+				type: 'post',
+				url: '__CONTROLLER__/doPublish',
+				data: $('form').serialize(),
+				success: success,
+				dataType: 'json'
+			});
+			function success(data) {
+				console.log(data);
+				if (data.status == 1) {
+					window.location.href = data.url;
+				} else {
+					alert(data.info);
+				}
+			}
+		})
+	});
+</script>
+</html>

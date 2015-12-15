@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>项目详情-蜂鸟创投</title>
+    <include file="Blocks/import"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <include file="Blocks/header"/>
+    </div>
+    <div class="content">
+        <include file="Blocks/stayTuned"/>
+        <div class="container">
+            <!--内容显示列表-->
+            <div class="col-md-8 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="padding:10px 0">
+                        <div class="col-md-3 text-center" style="padding-left:0">
+                            <php>
+                                if(empty($project['logo'])){
+                            </php>
+                            <div class="headpic-default">
+                                <span class="">{$project.pname|mb_substr=0,1,"utf-8"|strtoupper}</span>
+                            </div>
+                            <php>}else{</php>
+                            <img src="__ROOT__/Uploads/projectpic{$project.logo}" alt="" class="headpic">
+                            <php>}</php>
+                        </div>
+                        <div class="col-md-7" style="padding-left:0">
+                            <div class="row">
+                                <span>项目名称：</span>
+                                <span>{$project.pname} </span>
+                            </div>
+                            <div class="row">
+                                <span>项目类型：</span>
+                                <span>{$project.ptype}</span>
+                            </div>
+                            <div class="row">
+                                <span>项目地区：</span>
+                                <span>{$project.location}</span>
+                            </div>
+                            <div class="row">
+                                <span>项目标签：</span>
+                                <span>{$project.ptag}</span>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-2">
+                            <!--TODO 判断是否为自身-->
+                            <if condition="$_SESSION['user']['id'] neq $project['uid']">
+                            <button class="mtop1 form-control btn btn-sm btn-danger input-sm" id="follow">{$project.follow}</button>
+                            </if>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-md-12">
+                            <h4>项目状况</h4>
+
+                            <p>
+                                <span>参与人数：</span>
+                                <span>{$project.num}</span>
+
+                            </p>
+
+                            <p>
+                                <span>项目阶段：</span>
+                                <span>{$project.stage}</span>
+                            </p>
+
+                            <p>
+                                <span>演示地址：</span>
+                                <span>
+                                    <a href="{$project.demourl}">{$project.demourl}</a>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-md-12">
+                            <h4>融资信息</h4>
+
+                            <p>
+                                <span>项目优势及规划：</span>
+                                <span>{$project.intro}</span>
+
+                            </p>
+
+                            <p>
+                                <span>融资数额：</span>
+                                <span>{$project.needmoney}万</span>
+
+                            </p>
+
+                            <p>
+                                <span>寻找合伙人类型：</span>
+                                <span>{$project.partnertype}</span>
+
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!--相关信息筛选-->
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        项目相关
+                    </div>
+                    <div class="panel-body">
+                        <!--项目-->
+                        <h4>项目成员</h4>
+                        <div class="row">
+
+                                <!--TODO 项目成员展示-->
+                                <volist name="member" id="vo">
+                                    <div class="col-md-4 text-center">
+                                        <a href="__MODULE__/Founder/detail?id={$vo.id}">
+                                            <img src="__ROOT__/Uploads/headpic{$vo.headpic}" alt="" class="img64">
+                                        </a>
+                                        <p>
+                                            <span class="label label-primary">{$vo.username|subtext=4}</span>
+                                        </p>
+                                    </div>
+                                </volist>
+
+
+
+                        </div>
+
+                        <!--他的主题内容-->
+                        <div class="line"></div>
+                        <h4>相似项目</h4>
+
+                        <div class="row" style="margin-bottom: 4px">
+                            <!--TODO 项目列表显示-->
+                            <volist name="likeprojects" id="vo">
+                                <div class="col-md-4 text-center">
+                                    <a href="__MODULE__/Project/detail?id={$vo.id}">
+                                        <img src="__ROOT__/Uploads/projectpic{$vo.logo}" alt="" class="img64">
+                                    </a>
+
+                                    <p>
+                                        <span class="label label-primary">{$vo.pname|subtext=4}</span>
+                                    </p>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <include file="Blocks/footer"/>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $("#follow").on('click', '', function (event) {
+            event.preventDefault();
+            var id = $(this).attr('id');
+            $(this).load('__MODULE__/User/doFollowProject?id={$Think.get.id}');
+        });
+    });
+</script>
